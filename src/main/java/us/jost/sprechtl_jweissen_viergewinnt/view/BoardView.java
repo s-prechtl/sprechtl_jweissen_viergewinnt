@@ -1,6 +1,8 @@
 package us.jost.sprechtl_jweissen_viergewinnt.view;
 
-import java.lang.reflect.Array;
+
+import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
+
 import java.util.ArrayList;
 
 public interface BoardView {

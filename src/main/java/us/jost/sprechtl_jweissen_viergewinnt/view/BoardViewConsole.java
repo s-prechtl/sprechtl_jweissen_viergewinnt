@@ -1,17 +1,32 @@
 package us.jost.sprechtl_jweissen_viergewinnt.view;
 
+import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BoardViewConsole implements BoardView {
     private CellViewConsole cellView;
 
-    BoardViewConsole(HashMap<PlayerID, Character> symbols) {
-
+    public BoardViewConsole(HashMap<PlayerID, Character> symbols) {
+        cellView = new CellViewConsole(symbols);
     }
 
+    /**
+     * Displays the board using CellViewConsole with column numbers on top
+     * @param board
+     */
     @Override
     public void display(ArrayList<ArrayList<PlayerID>> board) {
-        //TODO: display board using CellView
+        for (int i = 0; i < board.size(); i++) {
+            System.out.printf(" %d ", i);
+        }
+        System.out.println();
+        for (int row = 0; row < board.get(0).size(); row++) {
+            for (ArrayList<PlayerID> col : board) {
+                cellView.display(col.get(row));
+            }
+            System.out.println();
+        }
     }
 }
