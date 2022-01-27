@@ -28,7 +28,13 @@ public class Game {
         randomizePlayers();
     }
 
-    public void undo() {
+    /**
+     * @throws UndoNotPossibleException If prevChanged is null. If its move no. 1, or undo has been called before
+     */
+    public void undo() throws UndoNotPossibleException {
+        if (board.getPreviouslyChanged() == null){
+            throw new UndoNotPossibleException();
+        }
         board.getPreviouslyChanged().setState(null);
         switchCurrPlayer();
     }
@@ -49,13 +55,19 @@ public class Game {
         currPlayer = (currPlayer == PlayerID.Player0) ? PlayerID.Player1 : PlayerID.Player0;
     }
 
-    // GETTER & SETTER
-
     public String getPlayerName(PlayerID playerID) {
         return players.get(playerID).getName();
     }
 
     public PlayerID getCurrPlayer() {
         return currPlayer;
+    }
+
+    public boolean checkWin(){
+        return board.checkWin();
+    }
+
+    public boolean checkTie(){
+        return board.checkTie();
     }
 }
