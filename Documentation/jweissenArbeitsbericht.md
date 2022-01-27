@@ -8,6 +8,6 @@
 ## 27.01.2022 17:00
 
 * Klassendiagramm mehrfach überarbeitet
-* IntelliJ
-⋅⋅* Projekt erstellt
-⋅⋅* Klassen hinzugefügt (Controller, View)
+* IntelliJ 
+  * Projekt erstellt
+  * Klassen hinzugefügt (Controller, View)
