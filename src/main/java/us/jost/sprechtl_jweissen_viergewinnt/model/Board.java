@@ -18,23 +18,25 @@ public class Board {
         previouslyChanged = null;
     }
 
-    public void clear(){
-        //TODO: clears all cells
-    }
-
     public boolean checkWin(){
         //TODO: checks for a win starting at previouslyChanged
         return false;
     }
 
     public boolean checkTie(){
-        //TODO: checks for tie
-        return false;
+        boolean isTie = true;
+        for (int x = 0; x < COLS && isTie; x++) {
+            for (int y = 0; y < ROWS && isTie; y++) {
+                if (accessCell(x,y).getState() == null){
+                    isTie = false;
+                }
+            }
+        }
+        return isTie;
     }
 
     private static boolean inArea(int x, int y){
-        //TODO: checks if xy is in ROWSCOLS
-        return false;
+        return (x < COLS) && (x >= 0) && (y < ROWS) && (y >= 0);
     }
 
     public ArrayList<ArrayList<PlayerID>> boardToPlayerIDs(){
@@ -48,8 +50,14 @@ public class Board {
     }
 
     private Cell accessCell(int x, int y){
-        //TODO: board.get().get() mit if inArea().
-        return new Cell();
+        Cell cell;
+        if (inArea(x, y)){
+            cell = board.get(x).get(y);
+        }else {
+            //TODO: errorHandling
+            cell = new Cell();
+        }
+        return cell;
     }
 
     public Cell getPreviouslyChanged() {
