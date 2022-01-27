@@ -40,14 +40,13 @@ public class Board {
 
         //left up to right down
         for (ix = initI_negative(x), iy = initI_negative(y); inArea(ix, iy) && !isWin; ix++, iy++) {
-            try {
-                if (accessCell(ix, iy).getState() == playerID) {
-                    winCount++;
-                } else {
-                    winCount = 0;
-                }
-            } catch (InvalidPositionException ignored) {
+
+            if (accessCell(ix, iy).getState() == playerID) {
+                winCount++;
+            } else {
+                winCount = 0;
             }
+
             if (winCount >= WINDIST) {
                 isWin = true;
             }
@@ -55,14 +54,13 @@ public class Board {
 
         //left down to right up
         for (ix = initI_negative(x), iy = initI_positive(y); inArea(ix, iy) && !isWin; ix++, iy--) {
-            try {
-                if (accessCell(ix, iy).getState() == playerID) {
-                    winCount++;
-                } else {
-                    winCount = 0;
-                }
-            } catch (InvalidPositionException ignored) {
+
+            if (accessCell(ix, iy).getState() == playerID) {
+                winCount++;
+            } else {
+                winCount = 0;
             }
+
             if (winCount >= WINDIST) {
                 isWin = true;
             }
@@ -76,14 +74,13 @@ public class Board {
         int winCount = 0;
 
         for (direction = initI_negative(direction); inArea(direction, 0) && !isWin; direction++) {
-            try {
-                if (accessCell(direction, i).getState() == playerID) {
-                    winCount++;
-                } else {
-                    winCount = 0;
-                }
-            } catch (InvalidPositionException ignored) {
+
+            if (accessCell(direction, i).getState() == playerID) {
+                winCount++;
+            } else {
+                winCount = 0;
             }
+
             if (winCount >= WINDIST) {
                 isWin = true;
             }
@@ -110,12 +107,11 @@ public class Board {
         boolean isTie = true;
         for (int x = 0; x < COLS && isTie; x++) {
             for (int y = 0; y < ROWS && isTie; y++) {
-                try {
-                    if (accessCell(x, y).getState() == null) {
-                        isTie = false;
-                    }
-                } catch (InvalidPositionException ignored) {
+
+                if (accessCell(x, y).getState() == null) {
+                    isTie = false;
                 }
+
             }
         }
         return isTie;
@@ -130,10 +126,7 @@ public class Board {
         for (int x = 0; x < COLS; x++) {
             boardIDs.add(new ArrayList<>());
             for (int y = 0; y < ROWS; y++) {
-                try {
-                    boardIDs.get(x).add(accessCell(x, y).getState());
-                } catch (InvalidPositionException ignored) {
-                }
+                boardIDs.get(x).add(accessCell(x, y).getState());
             }
         }
 
@@ -142,7 +135,7 @@ public class Board {
 
     /**
      * @return next free spot.
-     * @throws IllegalArgumentException If row is already full.
+     * @throws InvalidPositionException If row is already full.
      */
     public int getNextFreeRow(int col) throws InvalidPositionException {
         int nextFreeRow = -1;
@@ -158,11 +151,7 @@ public class Board {
         return nextFreeRow;
     }
 
-    public Cell accessCell(int x, int y) throws InvalidPositionException {
-        if (!inArea(x, y)) {
-            throw new InvalidPositionException();
-        }
-
+    public Cell accessCell(int x, int y) {
         return board.get(x).get(y);
     }
 

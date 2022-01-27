@@ -23,12 +23,18 @@ public class Game {
         currPlayer = (Math.abs(new Random().nextInt() % 2) == 0) ? PlayerID.Player0 : PlayerID.Player1;
     }
 
-    public void reset() {
+    private void reset() {
         board = new Board();
         randomizePlayers();
     }
 
-    public void undo() {
+    /**
+     * @throws UndoNotPossibleException If prevChanged is null. If its move no. 1, or undo has been called before
+     */
+    public void undo() throws UndoNotPossibleException {
+        if (board.getPreviouslyChanged() == null){
+            throw new UndoNotPossibleException();
+        }
         board.getPreviouslyChanged().setState(null);
         switchCurrPlayer();
     }
@@ -38,18 +44,16 @@ public class Game {
      *
      * @throws IllegalArgumentException If column is already full.
      */
-    public void play(int col) throws InvalidPositionException {
+    private void play(int col) throws InvalidPositionException {
         int y = board.getNextFreeRow(col);
 
         board.accessCell(col, y).setState(currPlayer);
         board.setPreviouslyChanged(board.accessCell(col, y));
     }
 
-    public void switchCurrPlayer() {
+    private void switchCurrPlayer() {
         currPlayer = (currPlayer == PlayerID.Player0) ? PlayerID.Player1 : PlayerID.Player0;
     }
-
-    // GETTER & SETTER
 
     public String getPlayerName(PlayerID playerID) {
         return players.get(playerID).getName();
@@ -57,5 +61,13 @@ public class Game {
 
     public PlayerID getCurrPlayer() {
         return currPlayer;
+    }
+
+    public boolean checkWin(){
+        return board.checkWin();
+    }
+
+    public boolean checkTie(){
+        return board.checkTie();
     }
 }
