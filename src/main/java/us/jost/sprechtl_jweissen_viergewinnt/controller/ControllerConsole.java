@@ -1,14 +1,21 @@
 package us.jost.sprechtl_jweissen_viergewinnt.controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import us.jost.sprechtl_jweissen_viergewinnt.model.Game;
+import us.jost.sprechtl_jweissen_viergewinnt.view.BoardView;
+import us.jost.sprechtl_jweissen_viergewinnt.view.MessageView;
+import us.jost.sprechtl_jweissen_viergewinnt.view.PromptView;
 
 public class ControllerConsole {
-    @FXML
-    private Label welcomeText;
+    private static Game game;
+    private static BoardView boardView;
+    private static PromptView promptView;
+    private static MessageView messageView;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    public static void main(String[] args) {
+
+    }
+
+    private static void init() {
+
     }
 }
