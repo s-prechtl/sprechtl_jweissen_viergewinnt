@@ -23,12 +23,12 @@ public class Game {
         currPlayer = (Math.abs(new Random().nextInt() % 2) == 0) ? PlayerID.Player0 : PlayerID.Player1;
     }
 
-    private void reset() {
+    public void reset() {
         board = new Board();
         randomizePlayers();
     }
 
-    private void undo() {
+    public void undo() {
         board.getPreviouslyChanged().setState(null);
         switchCurrPlayer();
     }
@@ -38,14 +38,24 @@ public class Game {
      *
      * @throws IllegalArgumentException If column is already full.
      */
-    private void play(int col) throws InvalidPositionException {
+    public void play(int col) throws InvalidPositionException {
         int y = board.getNextFreeRow(col);
 
         board.accessCell(col, y).setState(currPlayer);
         board.setPreviouslyChanged(board.accessCell(col, y));
     }
 
-    private void switchCurrPlayer() {
+    public void switchCurrPlayer() {
         currPlayer = (currPlayer == PlayerID.Player0) ? PlayerID.Player1 : PlayerID.Player0;
+    }
+
+    // GETTER & SETTER
+
+    public String getPlayerName(PlayerID playerID) {
+        return players.get(playerID).getName();
+    }
+
+    public PlayerID getCurrPlayer() {
+        return currPlayer;
     }
 }
