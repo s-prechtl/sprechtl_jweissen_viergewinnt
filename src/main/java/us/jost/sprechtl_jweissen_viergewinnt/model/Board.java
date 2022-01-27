@@ -44,9 +44,16 @@ public class Board {
         return new ArrayList<>();
     }
 
-    private boolean isLegalMove(int col){
-        //TODO: checks if called col is not filled
-        return false;
+    private int getNextFreeRow(int col){
+        int nextFreeRow = -1;
+
+        for (int y = 0; y < ROWS && nextFreeRow == -1; y++) {
+            if (accessCell(col, y).getState() == null){
+                nextFreeRow = y;
+            }
+        }
+
+        return nextFreeRow;
     }
 
     private Cell accessCell(int x, int y){
