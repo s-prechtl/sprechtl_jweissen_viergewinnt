@@ -7,11 +7,6 @@ public class Player {
         this.name = name;
     }
 
-    public static String input(){
-        //TODO: gets an input to place cell
-        return "";
-    }
-
     public String getName() {
         return name;
     }

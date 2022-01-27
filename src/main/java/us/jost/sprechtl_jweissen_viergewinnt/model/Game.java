@@ -16,27 +16,36 @@ public class Game {
         randomizePlayers();
     }
 
-    private void randomizePlayers(){
-        //TODO: A random starting player should be generated
+    /**
+     * Chooses a random player to begin the game.
+     */
+    private void randomizePlayers() {
+        currPlayer = (Math.abs(new Random().nextInt() % 2) == 0) ? PlayerID.Player0 : PlayerID.Player1;
     }
 
-    private void reset(){
+    private void reset() {
         board = new Board();
         randomizePlayers();
     }
 
-    private void undo(){
+    private void undo() {
         board.getPreviouslyChanged().setState(null);
         switchCurrPlayer();
     }
 
-    private void play(int col){
-        //TODO: checks for field to place move in and plays the move if legal
+    /**
+     * Plays a move in given column.
+     *
+     * @throws IllegalArgumentException If column is already full.
+     */
+    private void play(int col) throws InvalidPositionException {
+        int y = board.getNextFreeRow(col);
+
+        board.accessCell(col, y).setState(currPlayer);
+        board.setPreviouslyChanged(board.accessCell(col, y));
     }
 
-    private void switchCurrPlayer(){
-        currPlayer = (currPlayer==PlayerID.Player0)? PlayerID.Player1 : PlayerID.Player0;
+    private void switchCurrPlayer() {
+        currPlayer = (currPlayer == PlayerID.Player0) ? PlayerID.Player1 : PlayerID.Player0;
     }
-
-
 }
