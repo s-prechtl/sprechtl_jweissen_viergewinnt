@@ -20,3 +20,9 @@
 * Klassendiagramm bearbeitet
 * debugging checkWin()
 * Vervollsändigung der Konsolen Anwendung 1.0.
+
+## 9:45
+
+* Programmierrichtlinien durchgelesen - angewandt
+    * Dateikommentare eingefügt
+    * Zeilenkommentare eingefügt/bestehende abgeändert
