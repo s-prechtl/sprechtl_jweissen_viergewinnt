@@ -63,7 +63,7 @@ public class Board {
 
             //left up to right down
             winCount = 0;
-            for (ix = initI_negative(x), iy = initI_negative(y); inArea(ix, iy) && !isWin; ix++, iy++) {
+            for (ix = initI_negative(x, Math.min(x,y)), iy = initI_negative(y, Math.min(x,y)); inArea(ix, iy) && !isWin; ix++, iy++) {
                 if (accessCell(ix, iy).getState() == playerID) {
                     winCount++;
                 } else {
@@ -76,7 +76,7 @@ public class Board {
 
             //right up to left down
             winCount = 0;
-            for (ix = initI_negative(x), iy = initI_positive(y); inArea(ix, iy) && !isWin; ix++, iy--) {
+            for (ix = initI_negative(x, Math.max(x,y)), iy = initI_positive(y, Math.max(x,y)); inArea(ix, iy) && !isWin; ix++, iy--) {
                 if (accessCell(ix, iy).getState() == playerID) {
                     winCount++;
                 } else {
@@ -100,10 +100,28 @@ public class Board {
     }
 
     /**
+     * @return Minimum value to end of area/to the winning number 4/WINDIST from current location
+     */
+    private int initI_negative(int z, int dist) {
+        return Math.max(z - dist, 0);
+    }
+    /**
      * @return Maximum value to end of area top/to the winning number 4/WINDIST from current location
      */
     private int initI_positive(int z) {
         return (z + WINDIST >= ROWS) ? ROWS - 1 : z + WINDIST;
+    }
+
+    private int initI_positive(int z, int dist) {
+        return (z + dist >= ROWS) ? ROWS - 1 : z + dist;
+    }
+
+    private int initDiagonal(int x, int y){
+        int sub = 0;
+        if (x != y){
+            sub = initI_negative(x, Math.min(x,y));
+        }
+        return sub;
     }
 
 
