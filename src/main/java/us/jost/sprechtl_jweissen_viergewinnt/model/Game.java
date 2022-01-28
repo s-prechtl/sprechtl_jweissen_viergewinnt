@@ -36,6 +36,7 @@ public class Game {
         if (board.getPreviouslyChanged() == null){
             throw new UndoNotPossibleException();
         }
+        board.getPreviouslyChanged().setState(null);
         board.setPreviouslyChanged(null);
         switchCurrPlayer();
     }
