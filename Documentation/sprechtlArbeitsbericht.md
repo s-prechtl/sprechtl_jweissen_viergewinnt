@@ -13,7 +13,7 @@
 * Erstellen der Model-Klassen + dekleration der Methoden
 * Anpassungen am Klassendiagramm. 
 
-#28.01.2022
+# 28.01.2022
 ## 3:00
 
 * Modelklassen vervollfständigt
