@@ -1,3 +1,18 @@
+/*-----------------------------------------------------------------------------
+ *              Hoehere Technische Bundeslehranstalt STEYR
+ *           Fachrichtung Informationstechnologie und Netzwerktechnik
+ ----------------------------------------------------------------------------/
+/**
+ * Kurzbeschreibung
+ *
+ * @author  : Jonas Weissengruber
+ * @date    : 28.01.2022
+ *
+ * @details
+ *   Stellt das Spielfeld mithilfe des PlayerID-Boards in der Konsole dar
+ *   Nutzt dazu die CellViewConsole
+ */
+
 package us.jost.sprechtl_jweissen_viergewinnt.view;
 
 import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
@@ -13,8 +28,8 @@ public class BoardViewConsole implements BoardView {
     }
 
     /**
-     * Displays the board using CellViewConsole with column numbers on top
-     * @param board
+     * Gibt das Spielfeld mit Zahlen der Spalten darüber aus, nutzt zur Darstellung der Zellen CellViewConsole
+     * @param board Spezifiziert den Inhalt der Zellen
      */
     @Override
     public void display(ArrayList<ArrayList<PlayerID>> board) {
