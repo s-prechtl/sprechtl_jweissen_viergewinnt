@@ -1,5 +1,6 @@
 package us.jost.sprechtl_jweissen_viergewinnt.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -69,5 +70,9 @@ public class Game {
 
     public boolean checkTie(){
         return board.checkTie();
+    }
+
+    public ArrayList<ArrayList<PlayerID>> getPlayerIDBoard(){
+        return board.boardToPlayerIDs();
     }
 }
