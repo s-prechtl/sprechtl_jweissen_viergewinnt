@@ -18,3 +18,8 @@
 * View-Klassen implementiert
 * ControllerConsole-Klasse implementiert
 * Konsolenanwendung 1.0 vervollständigt
+
+## 28.01.2022 09:40
+
+* View-Klassen kommentiert
+* Refactoring & Kommentieren der ControllerConsole-Klasse
