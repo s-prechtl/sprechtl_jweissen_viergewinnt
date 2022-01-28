@@ -24,45 +24,53 @@ public class ControllerConsole {
 
         char action;
         String input;
-        boolean win, tie;
+        boolean win, tie, restart;
         Pattern legalAction = Pattern.compile("[0-6]|[RU]", Pattern.CASE_INSENSITIVE);
-
         do {
-            boardView.display(game.getPlayerIDBoard());
             do {
-                promptView.display(game.getPlayerName(game.getCurrPlayer()), "Enter your action: (0-6, [R]eset, [U]ndo)");
-                input = scanner.nextLine();
-            } while (!legalAction.matcher(input).matches());
-            action = input.toUpperCase().toCharArray()[0];
+                boardView.display(game.getPlayerIDBoard());
+                do {
+                    promptView.display(game.getPlayerName(game.getCurrPlayer()), "Enter your action: (0-6, [R]eset, [U]ndo)");
+                    input = scanner.nextLine();
+                } while (!legalAction.matcher(input).matches());
+                action = input.toUpperCase().toCharArray()[0];
 
-            if (Character.isDigit(action)) {
-                try {
-                    game.play(Integer.parseInt(String.valueOf(action)));
-                    game.switchCurrPlayer();
-                } catch (InvalidPositionException ipe) {
-                    messageView.display(ipe.getMessage());
+                if (Character.isDigit(action)) {
+                    try {
+                        game.play(Integer.parseInt(String.valueOf(action)));
+                        game.switchCurrPlayer();
+                    } catch (InvalidPositionException ipe) {
+                        messageView.display(ipe.getMessage());
+                    }
+                } else if (action == 'U') {
+                    try {
+                        game.undo();
+                        messageView.display("Last move undone!");
+                    } catch (UndoNotPossibleException unpe) {
+                        messageView.display(unpe.getMessage());
+                    }
+                } else if (action == 'R') {
+                    game.reset();
                 }
-            } else if (action == 'U') {
-                try {
-                    game.undo();
-                    messageView.display("Last move undone!");
-                } catch (UndoNotPossibleException unpe) {
-                    messageView.display(unpe.getMessage());
-                }
-            } else if (action == 'R') {
+                win = game.checkWin();
+                tie = game.checkTie();
+            } while (!(win || tie));
+
+            boardView.display(game.getPlayerIDBoard());
+            if (win) {
+                game.switchCurrPlayer();
+                messageView.display(game.getPlayerName(game.getCurrPlayer()) + " has won! Congratulations!");
+            } else {
+                messageView.display("It's a tie!");
+            }
+
+            messageView.display("Do you want to play again? (y/N)");
+            input = scanner.nextLine();
+            restart = Objects.equals(input, "y");
+            if (restart) {
                 game.reset();
             }
-            win = game.checkWin();
-            tie = game.checkTie();
-        } while (!(win || tie));
-
-        boardView.display(game.getPlayerIDBoard());
-        if (win) {
-            game.switchCurrPlayer();
-            messageView.display(game.getPlayerName(game.getCurrPlayer()) + " has won! Congratulations!");
-        } else {
-            messageView.display("It's a tie!");
-        }
+        } while (restart);
     }
 
     private static void initialize() {
