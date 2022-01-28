@@ -1,12 +1,12 @@
 # 20.01.2022
-## 13:25
+## 15:00
 
 * Aufsetzen des GitHub-Projektes
 * Durchgehen des Pflichtenheftes 
 * Klassendiagram via Pflichtenheft kontrolliern und erweitern.
 
 # 27.01.2022
-## 13:25
+## 17:00
 
 * Erstellen des IntelliJ Projektes
 * Ertellen der neuen Branches
