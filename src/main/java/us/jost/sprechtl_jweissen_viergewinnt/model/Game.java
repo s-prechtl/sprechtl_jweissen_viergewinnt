@@ -10,13 +10,13 @@ import java.util.Random;
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
  *----------------------------------------------------------------------------*/
 /**
- * Kurzbeschreibung
+ * Spiel
  *
  * @author  : Stefan Prechtl
  * @date    : 28.01.2022
  *
  * @details
- *   Verwalet Board und Spieler, welche darauf agieren.
+ *   Verwaltet Board und Spieler, welche darauf agieren.
  *
  */
 public class Game {
@@ -24,6 +24,11 @@ public class Game {
     private PlayerID currPlayer;
     private Board board;
 
+    /**
+     * Konstruktor: Erstellt Board und Spieler, welche damit agieren.
+     * @param name1 Name des 1. Spielers
+     * @param name2 Name des 2. Spielers
+     */
     public Game(String name1, String name2) {
         board = new Board();
 
@@ -33,19 +38,24 @@ public class Game {
     }
 
     /**
-     * Chooses a random player to begin the game.
+     * Bestimmt einen zufälligen currPlayer.
      */
     private void randomizePlayers() {
         currPlayer = (Math.abs(new Random().nextInt() % 2) == 0) ? PlayerID.Player0 : PlayerID.Player1;
     }
 
+    /**
+     * Setzt den Fortschritt des Spiels zurück.
+     */
     public void reset() {
         board = new Board();
         randomizePlayers();
     }
 
     /**
-     * @throws UndoNotPossibleException If prevChanged is null. If its move no. 1, or undo has been called before
+     * Macht den letzten Spielzug rückgängig.
+     * @throws UndoNotPossibleException Falls undo am ersten Zug aufgerufen wird, oder undo mehrmals hintereinander
+     * aufgerufen wird.
      */
     public void undo() throws UndoNotPossibleException {
         if (board.getPreviouslyChanged() == null){
@@ -57,9 +67,9 @@ public class Game {
     }
 
     /**
-     * Plays a move in given column.
-     *
-     * @throws IllegalArgumentException If column is already full.
+     * Spielt einen Zug in der angegebenen Spalte.
+     * @param col Spalte zum Setzen der Zuges.
+     * @throws IllegalArgumentException Falls die Spalte bereits voll ist.
      */
     public void play(int col) throws InvalidPositionException {
         int y = board.getNextFreeRow(col);
@@ -68,26 +78,45 @@ public class Game {
         board.setPreviouslyChanged(board.accessCell(col, y));
     }
 
+    /**
+     * Wechselt den currPlayer
+     */
     public void switchCurrPlayer() {
         currPlayer = (currPlayer == PlayerID.Player0) ? PlayerID.Player1 : PlayerID.Player0;
     }
 
+    /**
+     * @param playerID Zur Identifizierung
+     * @return Namen des identifizierten Spielers
+     */
     public String getPlayerName(PlayerID playerID) {
         return players.get(playerID).getName();
     }
 
+    /**
+     * @return Momentanen Spieler
+     */
     public PlayerID getCurrPlayer() {
         return currPlayer;
     }
 
+    /**
+     * @return Ob das Spiel gewonnen wurde.
+     */
     public boolean checkWin(){
         return board.checkWin();
     }
 
+    /**
+     * @return Ob das Spiel ein Unentschieden ist.
+     */
     public boolean checkTie(){
         return board.checkTie();
     }
 
+    /**
+     * @return Vereinfachte Liste des boards, auf welchem die Zellen nur durch ihren Wert/State angegeben werden.
+     */
     public ArrayList<ArrayList<PlayerID>> getPlayerIDBoard(){
         return board.boardToPlayerIDs();
     }

@@ -6,7 +6,7 @@ package us.jost.sprechtl_jweissen_viergewinnt.model;
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
  *----------------------------------------------------------------------------*/
 /**
- * Kurzbeschreibung
+ * Zelle
  *
  * @author  : Stefan Prechtl
  * @date    : 28.01.2022
@@ -20,24 +20,42 @@ public class Cell {
     private final int y;
     private PlayerID state;
 
+    /**
+     * Konstruktor: Initialisiert den Platz der Zelle und setzt den Wert/State auf null
+     * @param x Spalte
+     * @param y Reihe
+     */
     public Cell(int x, int y) {
         this.x = x;
         this.y = y;
         state = null;
     }
 
+    /**
+     * @return x
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * @return y
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * @return Wert/State
+     */
     public PlayerID getState() {
         return state;
     }
 
+    /**
+     * Setzt den Wert/State einer Zelle
+     * @param state Wert/State
+     */
     public void setState(PlayerID state) {
         this.state = state;
     }

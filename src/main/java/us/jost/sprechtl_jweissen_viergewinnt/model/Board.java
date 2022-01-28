@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
  *----------------------------------------------------------------------------*/
 /**
- * Kurzbeschreibung
+ * Spielbrett
  *
  * @author  : Stefan Prechtl
  * @date    : 28.01.2022
@@ -25,7 +25,7 @@ public class Board {
     private Cell previouslyChanged;
 
     /**
-     *
+     * Konstruktor: Initialisiert das Spielbrett.
      */
     public Board() {
         for (int x = 0; x < COLS; x++) {
@@ -38,12 +38,17 @@ public class Board {
     }
 
     /**
+     * @param x Spalte
+     * @param y Reihe
      * @return If given position is in the boundaries of ROWS/COLS
      */
     private static boolean inArea(int x, int y) {
         return (x < COLS) && (x >= 0) && (y < ROWS) && (y >= 0);
     }
 
+    /**
+     * @return Ob das Spiel gewonnen wurde.
+     */
     public boolean checkWin() {
         if (previouslyChanged != null) {
             int winCount = 0;
@@ -111,25 +116,34 @@ public class Board {
     }
 
     /**
-     * @return Minimum value to end of area/to the winning number 4/WINDIST from current location
+     * @param z Wert
+     * @return Minimalwert zum Ende des Feldes, bzw. zur WINDIST=4
      */
     private int initI_negative(int z) {
         return Math.max(z - WINDIST, 0);
     }
 
     /**
-     * @return Minimum value to end of area/to the maximum of winning number 4 or dist from current location
+     * @param z Wert
+     * @param dist Maximale Distanz zum Subtrahieren
+     * @return Maximalwert zum Ende des Feldes, bzw. zur dist
      */
     private int initI_negative(int z, int dist) {
         return Math.max(z - dist, 0);
     }
+
     /**
-     * @return Maximum value to end of area/to the maximum of winning number 4 or dist from current location
+     * @param z Wert
+     * @param dist Maximale Distanz zum Addieren
+     * @return Maximalwert zum Ende des Feldes, bzw. zur dist
      */
-     private int initI_positive(int z, int dist) {
+    private int initI_positive(int z, int dist) {
         return (z + dist >= ROWS) ? ROWS - 1 : z + dist;
     }
 
+    /**
+     * @return Ob das Spiel ein Unentschieden ist.
+     */
     public boolean checkTie() {
         boolean isTie = true;
         for (int x = 0; x < COLS && isTie; x++) {
@@ -145,7 +159,7 @@ public class Board {
     }
 
     /**
-     * @return The board without other cell data than its value.
+     * @return Vereinfachte Liste des boards, auf welchem die Zellen nur durch ihren Wert/State angegeben werden.
      */
     public ArrayList<ArrayList<PlayerID>> boardToPlayerIDs() {
         ArrayList<ArrayList<PlayerID>> boardIDs = new ArrayList<>();
@@ -161,8 +175,9 @@ public class Board {
     }
 
     /**
-     * @return next free spot.
-     * @throws InvalidPositionException If row is already full.
+     * @param col Spalte
+     * @return Nächster freier Platz in der Spalte
+     * @throws InvalidPositionException Falls die Spalte bereits voll ist.
      */
     public int getNextFreeRow(int col) throws InvalidPositionException {
         int nextFreeRow = -1;
