@@ -38,55 +38,50 @@ public class Board {
 
             //horizontal
             for (ix = initI_negative(x); inArea(ix, y) && !isWin; ix++) {
-
                 if (accessCell(ix, y).getState() == playerID) {
                     winCount++;
                 } else {
                     winCount = 0;
                 }
-
                 if (winCount >= WINDIST) {
                     isWin = true;
                 }
             }
 
             //vertical
+            winCount = 0;
             for (iy = initI_negative(y); inArea(x, iy) && !isWin; iy++) {
-
                 if (accessCell(x, iy).getState() == playerID) {
                     winCount++;
                 } else {
                     winCount = 0;
                 }
-
                 if (winCount >= WINDIST) {
                     isWin = true;
                 }
             }
 
             //left up to right down
+            winCount = 0;
             for (ix = initI_negative(x), iy = initI_negative(y); inArea(ix, iy) && !isWin; ix++, iy++) {
-
                 if (accessCell(ix, iy).getState() == playerID) {
                     winCount++;
                 } else {
                     winCount = 0;
                 }
-
                 if (winCount >= WINDIST) {
                     isWin = true;
                 }
             }
 
             //right up to left down
+            winCount = 0;
             for (ix = initI_negative(x), iy = initI_positive(y); inArea(ix, iy) && !isWin; ix++, iy--) {
-
                 if (accessCell(ix, iy).getState() == playerID) {
                     winCount++;
                 } else {
                     winCount = 0;
                 }
-
                 if (winCount >= WINDIST) {
                     isWin = true;
                 }
