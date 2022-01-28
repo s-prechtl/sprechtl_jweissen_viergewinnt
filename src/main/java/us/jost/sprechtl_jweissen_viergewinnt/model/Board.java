@@ -27,17 +27,42 @@ public class Board {
     }
 
     public boolean checkWin() {
-        if (previouslyChanged != null){
+        if (previouslyChanged != null) {
             int winCount = 0;
             PlayerID playerID = previouslyChanged.getState();
             int x = previouslyChanged.getX();
             int y = previouslyChanged.getY();
             int ix;
             int iy;
-            boolean isWin;
+            boolean isWin = false;
 
-            //horizontal and vertical
-            isWin = isWinHorVer(x, y, playerID) || isWinHorVer(y, x, playerID);
+            //horizontal
+            for (ix = initI_negative(x); inArea(ix, y) && !isWin; ix++) {
+
+                if (accessCell(ix, y).getState() == playerID) {
+                    winCount++;
+                } else {
+                    winCount = 0;
+                }
+
+                if (winCount >= WINDIST) {
+                    isWin = true;
+                }
+            }
+
+            //vertical
+            for (iy = initI_negative(y); inArea(x, iy) && !isWin; iy++) {
+
+                if (accessCell(x, iy).getState() == playerID) {
+                    winCount++;
+                } else {
+                    winCount = 0;
+                }
+
+                if (winCount >= WINDIST) {
+                    isWin = true;
+                }
+            }
 
             //left up to right down
             for (ix = initI_negative(x), iy = initI_negative(y); inArea(ix, iy) && !isWin; ix++, iy++) {
@@ -70,26 +95,6 @@ public class Board {
             return isWin;
         }
         return false;
-    }
-
-    private boolean isWinHorVer(int direction, int i, PlayerID playerID) {
-        boolean isWin = false;
-        int winCount = 0;
-
-        for (direction = initI_negative(direction); inArea(direction, 0) && !isWin; direction++) {
-
-            if (accessCell(direction, i).getState() == playerID) {
-                winCount++;
-            } else {
-                winCount = 0;
-            }
-
-            if (winCount >= WINDIST) {
-                isWin = true;
-            }
-        }
-
-        return isWin;
     }
 
     /**
