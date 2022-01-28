@@ -193,14 +193,26 @@ public class Board {
         return nextFreeRow;
     }
 
+    /**
+     * @param x Spalte
+     * @param y Reihe
+     * @return Zelle der gegebenen Position
+     */
     public Cell accessCell(int x, int y) {
         return board.get(x).get(y);
     }
 
+    /**
+     * @return Zuletzt geänderte Zelle
+     */
     public Cell getPreviouslyChanged() {
         return previouslyChanged;
     }
 
+    /**
+     * Setzt zuletzt geänderte Zelle
+     * @param previouslyChanged Zelle
+     */
     public void setPreviouslyChanged(Cell previouslyChanged) {
         this.previouslyChanged = previouslyChanged;
     }
