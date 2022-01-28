@@ -84,15 +84,18 @@ public class ControllerConsole {
         game = new Game(name1, name2);
 
         HashMap<PlayerID, Character> playingChars = new HashMap<>();
-        for (PlayerID playerID : defaultPlayingChars.keySet()) {
-            promptView.display(game.getPlayerName(playerID), "Enter your playing character: (Enter for default)");
-            String temp = scanner.nextLine();
-            if (!Objects.equals(temp, "")) {
-                playingChars.put(playerID, temp.toCharArray()[0]);
-            } else {
-                playingChars.put(playerID, defaultPlayingChars.get(playerID));
+        do {
+            for (PlayerID playerID : defaultPlayingChars.keySet()) {
+                promptView.display(game.getPlayerName(playerID), "Enter your playing character: (Enter for default)");
+                String temp = scanner.nextLine();
+                if (!Objects.equals(temp, "")) {
+                    playingChars.put(playerID, temp.toCharArray()[0]);
+                } else {
+                    playingChars.put(playerID, defaultPlayingChars.get(playerID));
+                }
             }
-        }
+        } while (playingChars.get(PlayerID.Player0) == playingChars.get(PlayerID.Player1));
+
         boardView = new BoardViewConsole(playingChars);
         messageView.display("Let the game begin!");
     }
