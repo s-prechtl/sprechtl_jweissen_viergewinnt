@@ -27,46 +27,49 @@ public class Board {
     }
 
     public boolean checkWin() {
-        int winCount = 0;
-        PlayerID playerID = previouslyChanged.getState();
-        int x = previouslyChanged.getX();
-        int y = previouslyChanged.getY();
-        int ix;
-        int iy;
-        boolean isWin;
+        if (previouslyChanged != null){
+            int winCount = 0;
+            PlayerID playerID = previouslyChanged.getState();
+            int x = previouslyChanged.getX();
+            int y = previouslyChanged.getY();
+            int ix;
+            int iy;
+            boolean isWin;
 
-        //horizontal and vertical
-        isWin = isWinHorVer(x, y, playerID) || isWinHorVer(y, x, playerID);
+            //horizontal and vertical
+            isWin = isWinHorVer(x, y, playerID) || isWinHorVer(y, x, playerID);
 
-        //left up to right down
-        for (ix = initI_negative(x), iy = initI_negative(y); inArea(ix, iy) && !isWin; ix++, iy++) {
+            //left up to right down
+            for (ix = initI_negative(x), iy = initI_negative(y); inArea(ix, iy) && !isWin; ix++, iy++) {
 
-            if (accessCell(ix, iy).getState() == playerID) {
-                winCount++;
-            } else {
-                winCount = 0;
+                if (accessCell(ix, iy).getState() == playerID) {
+                    winCount++;
+                } else {
+                    winCount = 0;
+                }
+
+                if (winCount >= WINDIST) {
+                    isWin = true;
+                }
             }
 
-            if (winCount >= WINDIST) {
-                isWin = true;
+            //left down to right up
+            for (ix = initI_negative(x), iy = initI_positive(y); inArea(ix, iy) && !isWin; ix++, iy--) {
+
+                if (accessCell(ix, iy).getState() == playerID) {
+                    winCount++;
+                } else {
+                    winCount = 0;
+                }
+
+                if (winCount >= WINDIST) {
+                    isWin = true;
+                }
             }
+
+            return isWin;
         }
-
-        //left down to right up
-        for (ix = initI_negative(x), iy = initI_positive(y); inArea(ix, iy) && !isWin; ix++, iy--) {
-
-            if (accessCell(ix, iy).getState() == playerID) {
-                winCount++;
-            } else {
-                winCount = 0;
-            }
-
-            if (winCount >= WINDIST) {
-                isWin = true;
-            }
-        }
-
-        return isWin;
+        return false;
     }
 
     private boolean isWinHorVer(int direction, int i, PlayerID playerID) {
