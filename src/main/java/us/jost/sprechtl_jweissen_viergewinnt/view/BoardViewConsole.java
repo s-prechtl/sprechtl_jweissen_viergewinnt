@@ -22,7 +22,7 @@ public class BoardViewConsole implements BoardView {
             System.out.printf(" %d ", i);
         }
         System.out.println();
-        for (int row = 0; row < board.get(0).size(); row++) {
+        for (int row = board.get(0).size()-1; row >= 0; row--) {
             for (ArrayList<PlayerID> col : board) {
                 cellView.display(col.get(row));
             }
