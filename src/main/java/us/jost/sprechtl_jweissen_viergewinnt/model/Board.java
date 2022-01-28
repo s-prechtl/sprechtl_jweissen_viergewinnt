@@ -2,6 +2,21 @@ package us.jost.sprechtl_jweissen_viergewinnt.model;
 
 import java.util.ArrayList;
 
+
+/*-----------------------------------------------------------------------------
+ *              Hoehere Technische Bundeslehranstalt STEYR
+ *           Fachrichtung Informationstechnologie und Netzwerktechnik
+ *----------------------------------------------------------------------------*/
+/**
+ * Spielbrett
+ *
+ * @author  : Stefan Prechtl
+ * @date    : 28.01.2022
+ *
+ * @details
+ *   Board, das zur Verwaltung der Cell-Daten verwendet wird.
+ *
+ */
 public class Board {
     private static final int ROWS = 6;
     private static final int COLS = 7;
@@ -9,6 +24,9 @@ public class Board {
     private final ArrayList<ArrayList<Cell>> board = new ArrayList<>();
     private Cell previouslyChanged;
 
+    /**
+     * Konstruktor: Initialisiert das Spielbrett.
+     */
     public Board() {
         for (int x = 0; x < COLS; x++) {
             board.add(new ArrayList<>());
@@ -20,12 +38,17 @@ public class Board {
     }
 
     /**
+     * @param x Spalte
+     * @param y Reihe
      * @return If given position is in the boundaries of ROWS/COLS
      */
     private static boolean inArea(int x, int y) {
         return (x < COLS) && (x >= 0) && (y < ROWS) && (y >= 0);
     }
 
+    /**
+     * @return Ob das Spiel gewonnen wurde.
+     */
     public boolean checkWin() {
         if (previouslyChanged != null) {
             int winCount = 0;
@@ -63,7 +86,7 @@ public class Board {
 
             //left up to right down
             winCount = 0;
-            for (ix = initI_negative(x), iy = initI_negative(y); inArea(ix, iy) && !isWin; ix++, iy++) {
+            for (ix = initI_negative(x, Math.min(x,y)), iy = initI_negative(y, Math.min(x,y)); inArea(ix, iy) && !isWin; ix++, iy++) {
                 if (accessCell(ix, iy).getState() == playerID) {
                     winCount++;
                 } else {
@@ -76,7 +99,7 @@ public class Board {
 
             //right up to left down
             winCount = 0;
-            for (ix = initI_negative(x), iy = initI_positive(y); inArea(ix, iy) && !isWin; ix++, iy--) {
+            for (ix = initI_negative(x, Math.max(x,y)), iy = initI_positive(y, Math.max(x,y)); inArea(ix, iy) && !isWin; ix++, iy--) {
                 if (accessCell(ix, iy).getState() == playerID) {
                     winCount++;
                 } else {
@@ -93,20 +116,34 @@ public class Board {
     }
 
     /**
-     * @return Minimum value to end of area/to the winning number 4/WINDIST from current location
+     * @param z Wert
+     * @return Minimalwert zum Ende des Feldes, bzw. zur WINDIST=4
      */
     private int initI_negative(int z) {
         return Math.max(z - WINDIST, 0);
     }
 
     /**
-     * @return Maximum value to end of area top/to the winning number 4/WINDIST from current location
+     * @param z Wert
+     * @param dist Maximale Distanz zum Subtrahieren
+     * @return Maximalwert zum Ende des Feldes, bzw. zur dist
      */
-    private int initI_positive(int z) {
-        return (z + WINDIST >= ROWS) ? ROWS - 1 : z + WINDIST;
+    private int initI_negative(int z, int dist) {
+        return Math.max(z - dist, 0);
     }
 
+    /**
+     * @param z Wert
+     * @param dist Maximale Distanz zum Addieren
+     * @return Maximalwert zum Ende des Feldes, bzw. zur dist
+     */
+    private int initI_positive(int z, int dist) {
+        return (z + dist >= ROWS) ? ROWS - 1 : z + dist;
+    }
 
+    /**
+     * @return Ob das Spiel ein Unentschieden ist.
+     */
     public boolean checkTie() {
         boolean isTie = true;
         for (int x = 0; x < COLS && isTie; x++) {
@@ -122,7 +159,7 @@ public class Board {
     }
 
     /**
-     * @return The board without other cell data than its value.
+     * @return Vereinfachte Liste des boards, auf welchem die Zellen nur durch ihren Wert/State angegeben werden.
      */
     public ArrayList<ArrayList<PlayerID>> boardToPlayerIDs() {
         ArrayList<ArrayList<PlayerID>> boardIDs = new ArrayList<>();
@@ -138,8 +175,9 @@ public class Board {
     }
 
     /**
-     * @return next free spot.
-     * @throws InvalidPositionException If row is already full.
+     * @param col Spalte
+     * @return Nächster freier Platz in der Spalte
+     * @throws InvalidPositionException Falls die Spalte bereits voll ist.
      */
     public int getNextFreeRow(int col) throws InvalidPositionException {
         int nextFreeRow = -1;
@@ -155,14 +193,26 @@ public class Board {
         return nextFreeRow;
     }
 
+    /**
+     * @param x Spalte
+     * @param y Reihe
+     * @return Zelle der gegebenen Position
+     */
     public Cell accessCell(int x, int y) {
         return board.get(x).get(y);
     }
 
+    /**
+     * @return Zuletzt geänderte Zelle
+     */
     public Cell getPreviouslyChanged() {
         return previouslyChanged;
     }
 
+    /**
+     * Setzt zuletzt geänderte Zelle
+     * @param previouslyChanged Zelle
+     */
     public void setPreviouslyChanged(Cell previouslyChanged) {
         this.previouslyChanged = previouslyChanged;
     }
