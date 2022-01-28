@@ -2,6 +2,21 @@ package us.jost.sprechtl_jweissen_viergewinnt.model;
 
 import java.util.ArrayList;
 
+
+/*-----------------------------------------------------------------------------
+ *              Hoehere Technische Bundeslehranstalt STEYR
+ *           Fachrichtung Informationstechnologie und Netzwerktechnik
+ *----------------------------------------------------------------------------*/
+/**
+ * Kurzbeschreibung
+ *
+ * @author  : Stefan Prechtl
+ * @date    : 28.01.2022
+ *
+ * @details
+ *   Board, das zur Verwaltung der Cell-Daten verwendet wird.
+ *
+ */
 public class Board {
     private static final int ROWS = 6;
     private static final int COLS = 7;
@@ -9,6 +24,9 @@ public class Board {
     private final ArrayList<ArrayList<Cell>> board = new ArrayList<>();
     private Cell previouslyChanged;
 
+    /**
+     *
+     */
     public Board() {
         for (int x = 0; x < COLS; x++) {
             board.add(new ArrayList<>());

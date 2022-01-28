@@ -4,6 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+
+/*-----------------------------------------------------------------------------
+ *              Hoehere Technische Bundeslehranstalt STEYR
+ *           Fachrichtung Informationstechnologie und Netzwerktechnik
+ *----------------------------------------------------------------------------*/
+/**
+ * Kurzbeschreibung
+ *
+ * @author  : Stefan Prechtl
+ * @date    : 28.01.2022
+ *
+ * @details
+ *   Verwalet Board und Spieler, welche darauf agieren.
+ *
+ */
 public class Game {
     private final HashMap<PlayerID, Player> players = new HashMap<>();
     private PlayerID currPlayer;
