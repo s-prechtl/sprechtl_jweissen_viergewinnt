@@ -53,7 +53,7 @@ public class Board {
                 }
             }
 
-            //left down to right up
+            //right up to left down
             for (ix = initI_negative(x), iy = initI_positive(y); inArea(ix, iy) && !isWin; ix++, iy--) {
 
                 if (accessCell(ix, iy).getState() == playerID) {
@@ -100,11 +100,12 @@ public class Board {
     }
 
     /**
-     * @return Maximum value to end of area/to the winning number 4/WINDIST from current location
+     * @return Maximum value to end of area top/to the winning number 4/WINDIST from current location
      */
     private int initI_positive(int z) {
-        return (z + WINDIST >= COLS) ? COLS - 1 : z + WINDIST;
+        return (z + WINDIST >= ROWS) ? ROWS - 1 : z + WINDIST;
     }
+
 
     public boolean checkTie() {
         boolean isTie = true;
