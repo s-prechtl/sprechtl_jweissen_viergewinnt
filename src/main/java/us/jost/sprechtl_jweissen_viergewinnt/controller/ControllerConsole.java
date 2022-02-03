@@ -31,19 +31,9 @@ public class ControllerConsole {
             do {
                 action = promptAction();
                 if (Character.isDigit(action)) {
-                    try {
-                        game.play(Integer.parseInt(String.valueOf(action)));
-                        game.switchCurrPlayer();
-                    } catch (InvalidPositionException ipe) {
-                        messageView.display(ipe.getMessage());
-                    }
+                    tryPlace(action);
                 } else if (action == 'U') {
-                    try {
-                        game.undo();
-                        messageView.display("Last move undone!");
-                    } catch (UndoNotPossibleException unpe) {
-                        messageView.display(unpe.getMessage());
-                    }
+                    tryUndo();
                 } else if (action == 'R') {
                     game.reset();
                 }
@@ -59,6 +49,34 @@ public class ControllerConsole {
             }
         } while (reset);
     }
+
+    /**
+     * versucht einen Spielstein zu platzieren, sollte dies nicht möglich sein,
+     * wird eine Error-Message ausgegeben
+     * @param action die Spalte, in die gesetzt werden soll
+     */
+    private static void tryPlace(char action) {
+        try {
+            game.play(Integer.parseInt(String.valueOf(action)));
+            game.switchCurrPlayer();
+        } catch (InvalidPositionException ipe) {
+            messageView.display(ipe.getMessage());
+        }
+    }
+
+    /**
+     * versucht, den letzten Move rückgängig zu machen, sollte dies nicht möglich sein,
+     * wird eine Error-Message ausgegeben
+     */
+    private static void tryUndo() {
+        try {
+            game.undo();
+            messageView.display("Last move undone!");
+        } catch (UndoNotPossibleException unpe) {
+            messageView.display(unpe.getMessage());
+        }
+    }
+
 
     /**
      * initialisiert die Attribute der Controller-Klasse
