@@ -7,14 +7,14 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="us.jost.sprechtl_jweissen_viergewinnt.controller.ControllerColorPickerGUI">
    <children>
-      <HBox alignment=us.jost.sprechtl_jweissen_viergewinnt.controller.ControllerColorPickerGUI"CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label prefHeight="17.0" prefWidth="232.0" text="Bitte wählen Sie eine Farbe:">
                <padding>
                   <Insets right="20.0" />
                </padding>
             </Label>
-            <ColorPicker />
+            <ColorPicker fx:id="ColorPickerPlayerColor"/>
          </children>
          <VBox.margin>
             <Insets />
@@ -22,7 +22,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Bast" />
+            <Button mnemonicParsing="false" onAction="#onConfirmButtonPressed" text="Bast" />
          </children>
       </HBox>
    </children>
