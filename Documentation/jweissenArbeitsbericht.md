@@ -23,3 +23,8 @@
 
 * View-Klassen kommentiert
 * Refactoring & Kommentieren der ControllerConsole-Klasse
+
+## 03.02.2022 11:00
+
+* Refactoring der ControllerConsole-Klasse
+* Klassendiagramm angepasst
