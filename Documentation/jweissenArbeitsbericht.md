@@ -28,3 +28,7 @@
 
 * Refactoring der ControllerConsole-Klasse
 * Klassendiagramm angepasst
+
+## 03.02.2022 17:00
+
+* Planen der GUI-Elemente
