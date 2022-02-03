@@ -26,3 +26,11 @@
 * Programmierrichtlinien durchgelesen - angewandt
     * Dateikommentare eingefügt
     * Zeilenkommentare eingefügt/bestehende abgeändert
+
+
+# 03.02.2022
+## 17:00
+
+* Planung GUI
+   * Erstellen der Weiteren FXML-Dateien, welche fuer die GUI benoetigt werden
+   * Erstellen der Controller fuer die FXML-Dateien
