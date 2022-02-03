@@ -1,3 +1,19 @@
+/*-----------------------------------------------------------------------------
+ *              Hoehere Technische Bundeslehranstalt STEYR
+ *           Fachrichtung Informationstechnologie und Netzwerktechnik
+ *----------------------------------------------------------------------------*/
+/**
+ * ControllerConsole-Klasse
+ *
+ * @author  : Jonas Weissengruber
+ * @date    : 03.02.2022
+ *
+ * @details
+ *   Controller für die Konsolenanwendung, enthält Anwendungsabhängigen Teil des Spielablaufs
+ *   verbindet Model&View
+ *
+ */
+
 package us.jost.sprechtl_jweissen_viergewinnt.controller;
 
 import us.jost.sprechtl_jweissen_viergewinnt.model.Game;
@@ -11,7 +27,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-//TODO j-weissen: Klassendiagramm updaten!!!
+
 public class ControllerConsole {
     private static Game game;
     private static BoardView boardView;
