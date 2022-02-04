@@ -13,13 +13,14 @@ public class ControllerColorPickerGUI {
 
     public ColorPicker ColorPickerPlayerColor;
 
-    public static void display() throws IOException {
+    public static Stage getStage() throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VierGewinntApplication.class.getResource("colorPicker-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("COLOR!");
         stage.setScene(scene);
-        stage.show();
+
+        return stage;
     }
 
     public void onConfirmButtonPressed() {
