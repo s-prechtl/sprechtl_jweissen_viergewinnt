@@ -1,3 +1,5 @@
+package us.jost.sprechtl_jweissen_viergewinnt.view;
+
 /*-----------------------------------------------------------------------------
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
@@ -12,8 +14,6 @@
  *   Gibt Nachrichten an die Spieler aus
  *
  */
-package us.jost.sprechtl_jweissen_viergewinnt.view;
-
 public interface MessageView {
     void display(String msg);
 }

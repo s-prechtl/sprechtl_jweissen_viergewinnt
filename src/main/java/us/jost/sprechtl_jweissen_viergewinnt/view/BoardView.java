@@ -1,3 +1,9 @@
+package us.jost.sprechtl_jweissen_viergewinnt.view;
+
+import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
+
+import java.util.ArrayList;
+
 /*-----------------------------------------------------------------------------
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
@@ -12,13 +18,6 @@
  *   Implementierende Klassen nutzen die display()-Methode um das Spielfeld darzustellen
  *
  */
-package us.jost.sprechtl_jweissen_viergewinnt.view;
-
-
-import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
-
-import java.util.ArrayList;
-
 public interface BoardView {
     void display(ArrayList<ArrayList<PlayerID>> board);
 }

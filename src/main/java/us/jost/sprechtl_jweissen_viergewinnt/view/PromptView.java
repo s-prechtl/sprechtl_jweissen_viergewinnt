@@ -1,3 +1,5 @@
+package us.jost.sprechtl_jweissen_viergewinnt.view;
+
 /*-----------------------------------------------------------------------------
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
@@ -12,8 +14,6 @@
  *   Fragt einen bestimmten Spieler nach einem Text-Input
  *
  */
-package us.jost.sprechtl_jweissen_viergewinnt.view;
-
 public interface PromptView {
     void display(String playerName, String msg);
 }

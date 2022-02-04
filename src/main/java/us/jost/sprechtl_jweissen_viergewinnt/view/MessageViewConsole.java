@@ -1,3 +1,5 @@
+package us.jost.sprechtl_jweissen_viergewinnt.view;
+
 /*-----------------------------------------------------------------------------
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
@@ -12,9 +14,6 @@
  *   Wird benutzt um Nachrichten an die Spieler in der Konsole dazustellen
  *   (Informiert zB wer gewonnen hat)
  */
-
-package us.jost.sprechtl_jweissen_viergewinnt.view;
-
 public class MessageViewConsole implements MessageView {
     @Override
     public void display(String msg) {
