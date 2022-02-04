@@ -52,7 +52,14 @@ public class ControllerGUI {
                 col.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent click) {
-                        tryPlace(finalX);
+                        if (!(game.checkTie() || game.checkWin())){
+                            messageView.display("");
+                            tryPlace(finalX);
+
+                            if (game.checkTie() || game.checkWin()){
+                                showResult(game.checkWin());
+                            }
+                        }
                     }
                 });
             }
@@ -61,12 +68,25 @@ public class ControllerGUI {
 
     }
 
+    /**
+     * Gibt das Ergebnis des Spieles aus
+     * @param win gibt an, ob jemand gewonnen hat oder ob es unentschieden ausging
+     */
+    private void showResult(boolean win) {
+        if (win) {
+            game.switchCurrPlayer();
+            messageView.display(game.getPlayerName(game.getCurrPlayer()) + " has won! Congratulations!");
+        } else {
+            messageView.display("It's a tie!");
+        }
+    }
+
     private ArrayList<ArrayList<Circle>> getAllCircles(){
         ArrayList<ArrayList<Circle>> circles = new ArrayList<>();
-        int x = HBoxField.getChildren().size()-1;
+        int x = 0;
         int y;
 
-        while (x >= 0){
+        while (x < HBoxField.getChildren().size()){
             if (HBoxField.getChildren().get(x) instanceof VBox){
                 VBox col = (VBox) HBoxField.getChildren().get(x);
                 circles.add(new ArrayList<>());
@@ -80,7 +100,7 @@ public class ControllerGUI {
 
                 }
             }
-            x--;
+            x++;
         }
 
         return circles;
@@ -133,15 +153,20 @@ public class ControllerGUI {
      */
     public void onButtonUndoClicked() {
         try {
+            boardView.updateCell(game.getPrevCell().getX(), game.getPrevCell().getY(), null);
             game.undo();
             messageView.display("Last move undone!");
-            boardView.updateCell(game.getPrevCell().getX(), game.getPrevCell().getY(), game.getCurrPlayer());
         } catch (UndoNotPossibleException unpe) {
             messageView.display(unpe.getMessage());
+        } catch (NullPointerException npe){
+            messageView.display(new UndoNotPossibleException().getMessage());
         }
     }
 
     public void onButtonResetClicked() {
+        game.reset();
+        //TODO: clear
+//        boardView.clear();
     }
 
     public void onButtonQuitClicked() {
