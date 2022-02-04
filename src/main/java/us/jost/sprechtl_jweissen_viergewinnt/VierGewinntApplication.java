@@ -22,7 +22,6 @@ public class VierGewinntApplication extends Application {
         Stage namePicker = ControllerNamePickerGUI.getStage();
 
         stage.show();
-
         ControllerGUI.getControllerGUI().init(namePicker, colorPicker);
     }
 
