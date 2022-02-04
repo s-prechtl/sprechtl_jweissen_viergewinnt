@@ -19,4 +19,12 @@ public class BoardViewGUI {
     public void updateCell(int x, int y, PlayerID playerID) {
         cellViewGUI.display(board.get(x).get(y), playerID);
     }
+
+    public void clear() {
+        for (int x = 0; x < board.size(); x++) {
+            for (int y = 0; y < board.get(0).size(); y++) {
+                updateCell(x, y, null);
+            }
+        }
+    }
 }
