@@ -11,7 +11,7 @@ public class BoardViewGUI {
     ArrayList<ArrayList<Circle>> board;
     CellViewGUI cellViewGUI;
 
-    BoardViewGUI(ArrayList<ArrayList<Circle>> board, HashMap<PlayerID, Color> colors) {
+    public BoardViewGUI(ArrayList<ArrayList<Circle>> board, HashMap<PlayerID, Color> colors) {
         this.board = board;
         cellViewGUI = new CellViewGUI(colors);
     }
