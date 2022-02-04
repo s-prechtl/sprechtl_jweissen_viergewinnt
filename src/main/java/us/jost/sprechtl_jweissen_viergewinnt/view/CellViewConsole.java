@@ -1,3 +1,9 @@
+package us.jost.sprechtl_jweissen_viergewinnt.view;
+
+import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
+
+import java.util.HashMap;
+
 /*-----------------------------------------------------------------------------
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
@@ -12,12 +18,6 @@
  *   Stellt einzelne Zellen des Spielfeldes basierend auf dessen Inhalt an
  *   Wird von BoardViewConsole verwendet um das Spielfeld darzustellen
  */
-package us.jost.sprechtl_jweissen_viergewinnt.view;
-
-import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
-
-import java.util.HashMap;
-
 public class CellViewConsole implements CellView {
     private HashMap<PlayerID, Character> symbols;
 
@@ -29,6 +29,7 @@ public class CellViewConsole implements CellView {
      * Löst den cell-Parameter in das in symbols spezifizierte Spielsymbol des jeweiligen Spielers auf
      * Stellt dann eine einzelne Zelle in der Konsole mit dem entsprechendem Symbol dar.
      * Gilt cell == null, ist das Feld noch nicht besetzt und es wird eine leere Zelle dargestellt
+     *
      * @param cell gibt den Speiler an, welcher dieses Feld besetzt.
      */
     @Override

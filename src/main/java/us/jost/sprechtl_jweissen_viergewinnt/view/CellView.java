@@ -1,3 +1,7 @@
+package us.jost.sprechtl_jweissen_viergewinnt.view;
+
+import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
+
 /*-----------------------------------------------------------------------------
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
@@ -12,10 +16,6 @@
  *   Stellt einzelne Zellen des Spielfeldes dar
  *
  */
-package us.jost.sprechtl_jweissen_viergewinnt.view;
-
-import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
-
 public interface CellView {
     void display(PlayerID cell);
 }
