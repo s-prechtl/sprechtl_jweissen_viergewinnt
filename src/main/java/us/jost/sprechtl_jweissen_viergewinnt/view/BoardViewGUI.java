@@ -30,7 +30,7 @@ public class BoardViewGUI {
      * @param board  2D ArrayList aus Referenzen auf Circle-Instanzen, die die Zellen darstellen
      * @param colors Zuordnung von Spieler und der Farben ihrer Spielsteine
      */
-    BoardViewGUI(ArrayList<ArrayList<Circle>> board, HashMap<PlayerID, Color> colors) {
+    public BoardViewGUI(ArrayList<ArrayList<Circle>> board, HashMap<PlayerID, Color> colors) {
         this.board = board;
         cellViewGUI = new CellViewGUI(colors);
     }

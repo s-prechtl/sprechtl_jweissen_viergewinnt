@@ -23,7 +23,7 @@ public class MessageViewGUI implements MessageView {
      *
      * @param label Label, auf welches geschrieben werden soll
      */
-    MessageViewGUI(Label label) {
+    public MessageViewGUI(Label label) {
         this.label = label;
     }
 
