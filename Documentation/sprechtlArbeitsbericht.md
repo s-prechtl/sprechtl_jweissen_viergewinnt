@@ -34,3 +34,10 @@
 * Planung GUI
    * Erstellen der Weiteren FXML-Dateien, welche fuer die GUI benoetigt werden
    * Erstellen der Controller fuer die FXML-Dateien
+
+# 04.02.2022
+## 14:30
+
+* Umsetzugn GUI
+   * GUI Kontroller und FXML-Datein angepasst/fertiggestellt
+   * Modelklassen leicht angepasst
