@@ -14,6 +14,12 @@ public class CellViewGUI {
     }
 
     public void display(Circle cell, PlayerID playerID) {
-        cell.setFill(colors.get(playerID));
+        Color color;
+        if (playerID != null) {
+            color = colors.get(playerID);
+        } else {
+            color = Color.WHITE;
+        }
+        cell.setFill(color);
     }
 }
