@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import us.jost.sprechtl_jweissen_viergewinnt.VierGewinntApplication;
 import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
 import us.jost.sprechtl_jweissen_viergewinnt.view.MessageView;
+import us.jost.sprechtl_jweissen_viergewinnt.view.MessageViewGUI;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -39,7 +40,7 @@ public class ControllerColorPickerGUI {
     }
 
     public void initialize(){
-        //TODO: messageView
+        messageView = new MessageViewGUI(LabelError);
         defaultColors.put(PlayerID.Player0, Color.RED);
         defaultColors.put(PlayerID.Player1, Color.BLUE);
         ColorPickerPlayerColor.setValue(defaultColors.get(PlayerID.Player0));

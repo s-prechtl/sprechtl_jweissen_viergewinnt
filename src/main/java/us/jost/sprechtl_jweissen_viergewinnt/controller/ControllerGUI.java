@@ -10,6 +10,7 @@ import us.jost.sprechtl_jweissen_viergewinnt.model.Game;
 import us.jost.sprechtl_jweissen_viergewinnt.model.Player;
 import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
 import us.jost.sprechtl_jweissen_viergewinnt.view.MessageView;
+import us.jost.sprechtl_jweissen_viergewinnt.view.MessageViewGUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class ControllerGUI {
     }
 
     public void initialize(){
-        //TODO: messageviewGUI
+        messageView = new MessageViewGUI(LabelMessage);
     }
 
     public void init(Stage namePicker, Stage colorPicker){
@@ -39,17 +40,17 @@ public class ControllerGUI {
         HashMap<PlayerID, String> playerNames;
         HashMap<PlayerID, Color> playerColors;
 
-        namePicker.setTitle(PlayerID.Player0.toString());
-        namePicker.showAndWait();
-        namePicker.setTitle(PlayerID.Player1.toString());
-        namePicker.showAndWait();
+        this.namePicker.setTitle(PlayerID.Player0.toString());
+        this.namePicker.showAndWait();
+        this.namePicker.setTitle(PlayerID.Player1.toString());
+        this.namePicker.showAndWait();
 
         playerNames = ControllerNamePickerGUI.getPlayerNames();
 
-        colorPicker.setTitle(playerNames.get(PlayerID.Player0));
-        colorPicker.showAndWait();
-        colorPicker.setTitle(playerNames.get(PlayerID.Player1));
-        colorPicker.showAndWait();
+        this.colorPicker.setTitle(playerNames.get(PlayerID.Player0));
+        this.colorPicker.showAndWait();
+        this.colorPicker.setTitle(playerNames.get(PlayerID.Player1));
+        this.colorPicker.showAndWait();
 
         playerColors = ControllerColorPickerGUI.getPlayerColors();
 

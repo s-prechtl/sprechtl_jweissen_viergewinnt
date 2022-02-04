@@ -13,6 +13,7 @@ import us.jost.sprechtl_jweissen_viergewinnt.VierGewinntApplication;
 import us.jost.sprechtl_jweissen_viergewinnt.model.Player;
 import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
 import us.jost.sprechtl_jweissen_viergewinnt.view.MessageView;
+import us.jost.sprechtl_jweissen_viergewinnt.view.MessageViewGUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class ControllerNamePickerGUI {
     }
 
     public void initialize(){
-        //TODO: messageView
+        messageView = new MessageViewGUI(LabelError);
     }
 
     public void onConfirmButtonPressed() {

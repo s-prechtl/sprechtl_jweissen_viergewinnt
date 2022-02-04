@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 public class MessageViewGUI implements MessageView {
     Label label;
 
-    MessageViewGUI(Label label) {
+    public MessageViewGUI(Label label) {
         this.label = label;
     }
 
