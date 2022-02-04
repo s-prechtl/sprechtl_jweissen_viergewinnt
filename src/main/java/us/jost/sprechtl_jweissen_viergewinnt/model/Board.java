@@ -84,7 +84,7 @@ public class Board {
                 }
             }
 
-            //left up to right down
+            //right up to left down
             winCount = 0;
             for (ix = initI_negative(x, Math.min(x,y)), iy = initI_negative(y, Math.min(x,y)); inArea(ix, iy) && !isWin; ix++, iy++) {
                 if (accessCell(ix, iy).getState() == playerID) {
@@ -97,7 +97,7 @@ public class Board {
                 }
             }
 
-            //right up to left down
+            //left up to right down
             winCount = 0;
             for (ix = initI_negative(x, Math.max(x,y)), iy = initI_positive(y, Math.max(x,y)); inArea(ix, iy) && !isWin; ix++, iy--) {
                 if (accessCell(ix, iy).getState() == playerID) {

@@ -32,6 +32,10 @@ import java.util.HashMap;
  * @date : 28.01.2022
  * @details Verwaltet Daten zum Spiel verbindet Ausgabe mit Eingabe und Spiel
  */
+//TODO: Augabe des aktuellen Spielers
+//TODO: mit Enter bestätigen
+//TODO: checkWin Linksoben nach rechtunten
+
 public class ControllerGUI {
     public HBox HBoxField;
     @FXML
@@ -72,7 +76,7 @@ public class ControllerGUI {
                 int finalX = x;
                 col.setOnMouseClicked(click -> {
                     if (!(game.checkTie() || game.checkWin())) {
-                        messageView.display("");
+                        messageView.display(game.getPlayerName(game.getCurrPlayer()) + "'s move.");
                         tryPlace(finalX);
 
                         if (game.checkWin()) {
@@ -138,6 +142,7 @@ public class ControllerGUI {
         boardView = new BoardViewGUI(getAllCircles(), playerColors);
 
         game = new Game(playerNames.get(PlayerID.Player0), playerNames.get(PlayerID.Player1));
+        messageView.display(game.getPlayerName(game.getCurrPlayer()) + "'s move.");
     }
 
     /**
