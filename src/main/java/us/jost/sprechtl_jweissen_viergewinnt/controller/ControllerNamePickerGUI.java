@@ -15,13 +15,14 @@ public class ControllerNamePickerGUI {
 
     public TextField LabelPlayerName;
 
-    public static void display() throws IOException {
+    public static Stage getStage() throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VierGewinntApplication.class.getResource("namePicker-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("NAME!");
         stage.setScene(scene);
-        stage.show();
+
+        return stage;
     }
 
     public void onConfirmButtonPressed() {

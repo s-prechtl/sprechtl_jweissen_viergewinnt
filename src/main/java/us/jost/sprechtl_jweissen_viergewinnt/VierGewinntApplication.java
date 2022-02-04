@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import us.jost.sprechtl_jweissen_viergewinnt.controller.ControllerColorPickerGUI;
+import us.jost.sprechtl_jweissen_viergewinnt.controller.ControllerGUI;
 import us.jost.sprechtl_jweissen_viergewinnt.controller.ControllerNamePickerGUI;
 
 import java.io.IOException;
@@ -16,9 +17,13 @@ public class VierGewinntApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("VIER GEWINNT!");
         stage.setScene(scene);
+
+        Stage colorPicker = ControllerColorPickerGUI.getStage();
+        Stage namePicker = ControllerNamePickerGUI.getStage();
+
         stage.show();
-        ControllerColorPickerGUI.display();
-        ControllerNamePickerGUI.display();
+
+        ControllerGUI.getControllerGUI().init(namePicker, colorPicker);
     }
 
     public static void main(String[] args) {
