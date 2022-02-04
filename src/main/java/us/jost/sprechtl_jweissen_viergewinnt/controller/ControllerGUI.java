@@ -1,7 +1,6 @@
 package us.jost.sprechtl_jweissen_viergewinnt.controller;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -11,12 +10,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import us.jost.sprechtl_jweissen_viergewinnt.model.*;
-import us.jost.sprechtl_jweissen_viergewinnt.view.BoardViewGUI;
-import us.jost.sprechtl_jweissen_viergewinnt.view.MessageView;
-import us.jost.sprechtl_jweissen_viergewinnt.view.MessageViewGUI;
+import us.jost.sprechtl_jweissen_viergewinnt.model.Game;
+import us.jost.sprechtl_jweissen_viergewinnt.model.InvalidPositionException;
+import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
+import us.jost.sprechtl_jweissen_viergewinnt.model.UndoNotPossibleException;
+import us.jost.sprechtl_jweissen_viergewinnt.view.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,25 +24,22 @@ import java.util.HashMap;
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
  *----------------------------------------------------------------------------*/
+
 /**
  * Controller des Hauptfensters
  *
- * @author  : Stefan Prechtl
- * @date    : 28.01.2022
- *
- * @details
- *   Verwaltet Daten zum Spiel verbindet Ausgabe mit Eingabe und Spiel
- *
+ * @author : Stefan Prechtl
+ * @date : 28.01.2022
+ * @details Verwaltet Daten zum Spiel verbindet Ausgabe mit Eingabe und Spiel
  */
 public class ControllerGUI {
     public HBox HBoxField;
     @FXML
     private Label LabelMessage;
 
-    private Stage namePicker;
-    private Stage colorPicker;
     private Game game;
     private MessageView messageView;
+    private EndView endView;
     BoardViewGUI boardView;
 
     private static ControllerGUI controllerGUI;
@@ -57,32 +53,32 @@ public class ControllerGUI {
 
     /**
      * Automatisch von JFX aufgerufen.
-     * Erstellt Messageview und legt die Listener an.
+     * Erstellt Messageview, Endview und legt die Listener an.
      */
-    public void initialize(){
+    public void initialize() {
         messageView = new MessageViewGUI(LabelMessage);
+        endView = new EndViewGUI(LabelMessage);
         addListeners();
     }
 
     /**
      * Legt die Listener für die Spalten des Spielfelds an.
      */
-    private void addListeners(){
+    private void addListeners() {
         int x = 0;
-        while (x < HBoxField.getChildren().size()){
-            Node col = (Node) HBoxField.getChildren().get(x);
-            if (col instanceof VBox){
+        while (x < HBoxField.getChildren().size()) {
+            if (HBoxField.getChildren().get(x) instanceof VBox) {
+                VBox col = (VBox) HBoxField.getChildren().get(x);
                 int finalX = x;
-                col.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent click) {
-                        if (!(game.checkTie() || game.checkWin())){
-                            messageView.display("");
-                            tryPlace(finalX);
+                col.setOnMouseClicked(click -> {
+                    if (!(game.checkTie() || game.checkWin())) {
+                        messageView.display("");
+                        tryPlace(finalX);
 
-                            if (game.checkTie() || game.checkWin()){
-                                showResult(game.checkWin());
-                            }
+                        if (game.checkWin()) {
+                            endView.displayWin(game.getPlayerName(game.getCurrPlayer()));
+                        } else if (game.checkTie()) {
+                            endView.displayTie();
                         }
                     }
                 });
@@ -93,33 +89,20 @@ public class ControllerGUI {
     }
 
     /**
-     * Gibt das Ergebnis des Spieles aus
-     * @param win gibt an, ob jemand gewonnen hat oder ob es unentschieden ausging
-     */
-    private void showResult(boolean win) {
-        if (win) {
-            game.switchCurrPlayer();
-            messageView.display(game.getPlayerName(game.getCurrPlayer()) + " has won! Congratulations!");
-        } else {
-            messageView.display("It's a tie!");
-        }
-    }
-
-    /**
      * @return Alle Kreise.
      */
-    private ArrayList<ArrayList<Circle>> getAllCircles(){
+    private ArrayList<ArrayList<Circle>> getAllCircles() {
         ArrayList<ArrayList<Circle>> circles = new ArrayList<>();
         int x = 0;
         int y;
 
-        while (x < HBoxField.getChildren().size()){
-            if (HBoxField.getChildren().get(x) instanceof VBox){
+        while (x < HBoxField.getChildren().size()) {
+            if (HBoxField.getChildren().get(x) instanceof VBox) {
                 VBox col = (VBox) HBoxField.getChildren().get(x);
                 circles.add(new ArrayList<>());
-                y = col.getChildren().size()-1;
+                y = col.getChildren().size() - 1;
                 while (y >= 0) {
-                    if (col.getChildren().get(y) instanceof Circle){
+                    if (col.getChildren().get(y) instanceof Circle) {
                         Circle circle = (Circle) col.getChildren().get(y);
                         circles.get(x).add(circle);
                         y--;
@@ -133,23 +116,21 @@ public class ControllerGUI {
         return circles;
     }
 
-    public void init(Stage namePicker, Stage colorPicker){
-        this.namePicker = namePicker;
-        this.colorPicker = colorPicker;
+    public void init(Stage namePicker, Stage colorPicker) {
         HashMap<PlayerID, String> playerNames;
         HashMap<PlayerID, Color> playerColors;
 
-        this.namePicker.setTitle(PlayerID.Player0.toString());
-        this.namePicker.showAndWait();
-        this.namePicker.setTitle(PlayerID.Player1.toString());
-        this.namePicker.showAndWait();
+        namePicker.setTitle(PlayerID.Player0.toString());
+        namePicker.showAndWait();
+        namePicker.setTitle(PlayerID.Player1.toString());
+        namePicker.showAndWait();
 
         playerNames = ControllerNamePickerGUI.getPlayerNames();
 
-        this.colorPicker.setTitle(playerNames.get(PlayerID.Player0));
-        this.colorPicker.showAndWait();
-        this.colorPicker.setTitle(playerNames.get(PlayerID.Player1));
-        this.colorPicker.showAndWait();
+        colorPicker.setTitle(playerNames.get(PlayerID.Player0));
+        colorPicker.showAndWait();
+        colorPicker.setTitle(playerNames.get(PlayerID.Player1));
+        colorPicker.showAndWait();
 
         playerColors = ControllerColorPickerGUI.getPlayerColors();
 
@@ -162,6 +143,7 @@ public class ControllerGUI {
     /**
      * Versucht einen Spielstein zu platzieren, sollte dies nicht möglich sein,
      * wird eine Error-Message ausgegeben.
+     *
      * @param col die Spalte, in die gesetzt werden soll
      */
     private void tryPlace(int col) {
@@ -181,7 +163,7 @@ public class ControllerGUI {
      */
     public void onButtonUndoClicked() {
         try {
-            if (game.checkWin()){
+            if (game.checkWin()) {
                 game.switchCurrPlayer();
             }
             boardView.updateCell(game.getPrevCell().getX(), game.getPrevCell().getY(), null);
@@ -189,7 +171,7 @@ public class ControllerGUI {
             messageView.display("Last move undone!");
         } catch (UndoNotPossibleException unpe) {
             messageView.display(unpe.getMessage());
-        } catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             messageView.display(new UndoNotPossibleException().getMessage());
         }
     }
@@ -200,8 +182,7 @@ public class ControllerGUI {
      */
     public void onButtonResetClicked() {
         game.reset();
-//        TODO: clear
-//        boardView.clear();
+        boardView.clear();
     }
 
     /**

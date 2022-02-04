@@ -1,24 +1,30 @@
 package us.jost.sprechtl_jweissen_viergewinnt.controller;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import us.jost.sprechtl_jweissen_viergewinnt.VierGewinntApplication;
-import us.jost.sprechtl_jweissen_viergewinnt.model.Player;
 import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
 import us.jost.sprechtl_jweissen_viergewinnt.view.MessageView;
 import us.jost.sprechtl_jweissen_viergewinnt.view.MessageViewGUI;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
+/*-----------------------------------------------------------------------------
+ *              Hoehere Technische Bundeslehranstalt STEYR
+ *           Fachrichtung Informationstechnologie und Netzwerktechnik
+ *----------------------------------------------------------------------------*/
+
+/**
+ * Controller für die Namenseingabe
+ *
+ * @author : Stefan Prechtl
+ * @date : 28.01.2022
+ * @details Holt sich den gewünschten Namen des jeweiligen Spielers.
+ */
 public class ControllerNamePickerGUI {
 
     public TextField LabelPlayerName;
@@ -28,6 +34,10 @@ public class ControllerNamePickerGUI {
 
     private final static HashMap<PlayerID, String> playerNames = new HashMap<>();
 
+    /**
+     * @return Stage zum darstellen der GUI
+     * @throws IOException Falls das FXML-File nicht vorhanden ist
+     */
     public static Stage getStage() throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(VierGewinntApplication.class.getResource("namePicker-view.fxml"));
@@ -38,36 +48,48 @@ public class ControllerNamePickerGUI {
         return stage;
     }
 
-    public void initialize(){
+    /**
+     * Automatisch von JFX aufgerufen.
+     * Erstellt die messageView.
+     */
+    public void initialize() {
         messageView = new MessageViewGUI(LabelError);
     }
 
+    /**
+     * OnClick : Bast Button
+     * Fügt, falls möglich, den gewählten Namen für den momentanen Spieler ein.
+     */
     public void onConfirmButtonPressed() {
         boolean success = false;
         String temp = LabelPlayerName.getText();
         PlayerID currplayer = null;
 
-        if (!temp.equals("")){
-            if(playerNames.size() == 0){
+        if (!temp.equals("")) {
+            if (playerNames.size() == 0) {
                 success = true;
                 currplayer = PlayerID.Player0;
-            }else if (!playerNames.get(PlayerID.Player0).equals(temp)){
+            } else if (!playerNames.get(PlayerID.Player0).equals(temp)) {
                 success = true;
                 currplayer = PlayerID.Player1;
-            }else {
+            } else {
                 messageView.display("Player's names must not be equal!");
             }
-        }else{
+        } else {
             messageView.display("Player name must not be empty!");
         }
 
-        if (success){
+        if (success) {
+            messageView.display("");
             playerNames.put(currplayer, temp);
             LabelPlayerName.clear();
             ((Stage) (LabelPlayerName.getScene().getWindow())).close();
         }
     }
 
+    /**
+     * @return Die gewählten Namen als HashMap zugeordnet zu den Spielern.
+     */
     public static HashMap<PlayerID, String> getPlayerNames() {
         return playerNames;
     }
