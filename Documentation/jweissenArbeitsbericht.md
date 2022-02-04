@@ -32,3 +32,7 @@
 ## 03.02.2022 17:00
 
 * Planen der GUI-Elemente
+
+## 04.02.2022 09:40
+
+* Erstellen & implementieren der GUI-View Klassen
