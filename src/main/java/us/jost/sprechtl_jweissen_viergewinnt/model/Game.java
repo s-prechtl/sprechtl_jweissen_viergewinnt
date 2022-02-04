@@ -120,4 +120,11 @@ public class Game {
     public ArrayList<ArrayList<PlayerID>> getPlayerIDBoard(){
         return board.boardToPlayerIDs();
     }
+
+    /**
+     * @return Letzte Zelle
+     */
+    public Cell getPrevCell(){
+        return board.getPreviouslyChanged();
+    }
 }

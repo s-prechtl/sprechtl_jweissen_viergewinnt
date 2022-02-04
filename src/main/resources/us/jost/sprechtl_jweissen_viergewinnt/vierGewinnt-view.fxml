@@ -260,7 +260,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="LabelMessage" prefHeight="53.0" prefWidth="333.0" text="Message" textAlignment="CENTER">
+            <Label fx:id="LabelMessage" prefHeight="53.0" prefWidth="340.0" text="Message" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Consolas" size="12.0" />
                </font>
