@@ -21,6 +21,20 @@ import us.jost.sprechtl_jweissen_viergewinnt.view.MessageViewGUI;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*-----------------------------------------------------------------------------
+ *              Hoehere Technische Bundeslehranstalt STEYR
+ *           Fachrichtung Informationstechnologie und Netzwerktechnik
+ *----------------------------------------------------------------------------*/
+/**
+ * Controller des Hauptfensters
+ *
+ * @author  : Stefan Prechtl
+ * @date    : 28.01.2022
+ *
+ * @details
+ *   Verwaltet Daten zum Spiel verbindet Ausgabe mit Eingabe und Spiel
+ *
+ */
 public class ControllerGUI {
     public HBox HBoxField;
     @FXML
@@ -34,15 +48,25 @@ public class ControllerGUI {
 
     private static ControllerGUI controllerGUI;
 
+    /**
+     * Konstruktor zum setzen der static controllerGUI Variable.
+     */
     public ControllerGUI() {
         controllerGUI = this;
     }
 
+    /**
+     * Automatisch von JFX aufgerufen.
+     * Erstellt Messageview und legt die Listener an.
+     */
     public void initialize(){
         messageView = new MessageViewGUI(LabelMessage);
         addListeners();
     }
 
+    /**
+     * Legt die Listener für die Spalten des Spielfelds an.
+     */
     private void addListeners(){
         int x = 0;
         while (x < HBoxField.getChildren().size()){
@@ -81,6 +105,9 @@ public class ControllerGUI {
         }
     }
 
+    /**
+     * @return Alle Kreise.
+     */
     private ArrayList<ArrayList<Circle>> getAllCircles(){
         ArrayList<ArrayList<Circle>> circles = new ArrayList<>();
         int x = 0;
@@ -133,8 +160,8 @@ public class ControllerGUI {
     }
 
     /**
-     * versucht einen Spielstein zu platzieren, sollte dies nicht möglich sein,
-     * wird eine Error-Message ausgegeben
+     * Versucht einen Spielstein zu platzieren, sollte dies nicht möglich sein,
+     * wird eine Error-Message ausgegeben.
      * @param col die Spalte, in die gesetzt werden soll
      */
     private void tryPlace(int col) {
@@ -148,8 +175,9 @@ public class ControllerGUI {
     }
 
     /**
-     * versucht, den letzten Move rückgängig zu machen, sollte dies nicht möglich sein,
-     * wird eine Error-Message ausgegeben
+     * OnClick: Undo Button
+     * Versucht, den letzten Move rückgängig zu machen, sollte dies nicht möglich sein,
+     * wird eine Error-Message ausgegeben.
      */
     public void onButtonUndoClicked() {
         try {
@@ -166,16 +194,27 @@ public class ControllerGUI {
         }
     }
 
+    /**
+     * OnClick: Reset Button
+     * Setzt das Spiel zurück.
+     */
     public void onButtonResetClicked() {
         game.reset();
 //        TODO: clear
 //        boardView.clear();
     }
 
+    /**
+     * OnClick: Quit Button
+     * Beendet das Programm.
+     */
     public void onButtonQuitClicked() {
         Platform.exit();
     }
 
+    /**
+     * @return Instanz des Spiels
+     */
     public static ControllerGUI getControllerGUI() {
         return controllerGUI;
     }
