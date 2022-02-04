@@ -153,6 +153,9 @@ public class ControllerGUI {
      */
     public void onButtonUndoClicked() {
         try {
+            if (game.checkWin()){
+                game.switchCurrPlayer();
+            }
             boardView.updateCell(game.getPrevCell().getX(), game.getPrevCell().getY(), null);
             game.undo();
             messageView.display("Last move undone!");
@@ -165,7 +168,7 @@ public class ControllerGUI {
 
     public void onButtonResetClicked() {
         game.reset();
-        //TODO: clear
+//        TODO: clear
 //        boardView.clear();
     }
 
