@@ -10,7 +10,26 @@ import us.jost.sprechtl_jweissen_viergewinnt.controller.ControllerNamePickerGUI;
 
 import java.io.IOException;
 
+/*-----------------------------------------------------------------------------
+ *              Hoehere Technische Bundeslehranstalt STEYR
+ *           Fachrichtung Informationstechnologie und Netzwerktechnik
+ *----------------------------------------------------------------------------*/
+/**
+ * Anwendung
+ *
+ * @author  : Stefan Prechtl
+ * @date    : 28.01.2022
+ *
+ * @details
+ *   Startet das GUI
+ *
+ */
 public class VierGewinntApplication extends Application {
+    /**
+     * Startet die Anwendung
+     * @param stage Hauptfenster des GUI
+     * @throws IOException Falls FXML-File des Hauptfensters nicht vorhanden
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(VierGewinntApplication.class.getResource("vierGewinnt-view.fxml"));
@@ -25,6 +44,9 @@ public class VierGewinntApplication extends Application {
         ControllerGUI.getControllerGUI().init(namePicker, colorPicker);
     }
 
+    /**
+     * Startet das Programm.
+     */
     public static void main(String[] args) {
         launch();
     }
