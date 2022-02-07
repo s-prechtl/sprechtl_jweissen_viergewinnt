@@ -4,6 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import us.jost.sprechtl_jweissen_viergewinnt.VierGewinntApplication;
 import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
@@ -57,10 +59,34 @@ public class ControllerNamePickerGUI {
     }
 
     /**
-     * OnClick : Bast Button
-     * Fügt, falls möglich, den gewählten Namen für den momentanen Spieler ein.
+     * Event: OnClick
+     * Ruft confirmName auf.
      */
     public void onConfirmButtonPressed() {
+        confirmName();
+    }
+
+    /**
+     * @return Die gewählten Namen als HashMap zugeordnet zu den Spielern.
+     */
+    public static HashMap<PlayerID, String> getPlayerNames() {
+        return playerNames;
+    }
+
+    /**
+     * Falls Key == Enter -> confirmName
+     * @param keyEvent Key
+     */
+    public void onKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER){
+            confirmName();
+        }
+    }
+
+    /**
+     * Fügt, falls möglich, den gewählten Namen für den momentanen Spieler ein.
+     */
+    private void confirmName(){
         boolean success = false;
         String temp = LabelPlayerName.getText();
         PlayerID currplayer = null;
@@ -85,12 +111,5 @@ public class ControllerNamePickerGUI {
             LabelPlayerName.clear();
             ((Stage) (LabelPlayerName.getScene().getWindow())).close();
         }
-    }
-
-    /**
-     * @return Die gewählten Namen als HashMap zugeordnet zu den Spielern.
-     */
-    public static HashMap<PlayerID, String> getPlayerNames() {
-        return playerNames;
     }
 }

@@ -16,7 +16,7 @@
                   <Insets right="20.0" />
                </padding>
             </Label>
-            <TextField fx:id="LabelPlayerName" />
+            <TextField fx:id="LabelPlayerName" onKeyReleased="#onKeyReleased" />
          </children>
          <VBox.margin>
             <Insets />

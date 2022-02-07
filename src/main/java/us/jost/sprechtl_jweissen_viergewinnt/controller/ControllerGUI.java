@@ -32,8 +32,6 @@ import java.util.HashMap;
  * @date : 28.01.2022
  * @details Verwaltet Daten zum Spiel verbindet Ausgabe mit Eingabe und Spiel
  */
-//TODO: mit Enter bestätigen
-
 public class ControllerGUI {
     public HBox HBoxField;
     @FXML
