@@ -153,7 +153,9 @@ public class ControllerGUI {
         try {
             game.play(col);
             boardView.updateCell(game.getPrevCell().getX(), game.getPrevCell().getY(), game.getCurrPlayer());
-            game.switchCurrPlayer();
+            if (!game.checkWin()){
+                game.switchCurrPlayer();
+            }
         } catch (InvalidPositionException ipe) {
             messageView.display(ipe.getMessage());
         }
@@ -183,6 +185,7 @@ public class ControllerGUI {
     public void onButtonResetClicked() {
         game.reset();
         boardView.clear();
+        updateMessageView();
     }
 
     /**

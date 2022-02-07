@@ -61,9 +61,11 @@ public class Game {
         if (board.getPreviouslyChanged() == null){
             throw new UndoNotPossibleException();
         }
+        if (!checkWin()){
+            switchCurrPlayer();
+        }
         board.getPreviouslyChanged().setState(null);
         board.setPreviouslyChanged(null);
-        switchCurrPlayer();
     }
 
     /**
