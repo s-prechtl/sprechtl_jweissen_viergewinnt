@@ -1,3 +1,5 @@
+# **Arbeitsbericht Stefan Prechtl**
+
 # 20.01.2022
 ## 15:00
 
@@ -14,14 +16,14 @@
 * Anpassungen am Klassendiagramm. 
 
 # 28.01.2022
-## 3:00
+## 03:00
 
 * Modelklassen vervollfständigt
 * Klassendiagramm bearbeitet
 * debugging checkWin()
 * Vervollsändigung der Konsolen Anwendung 1.0.
 
-## 9:45
+## 09:45
 
 * Programmierrichtlinien durchgelesen - angewandt
     * Dateikommentare eingefügt
@@ -38,6 +40,14 @@
 # 04.02.2022
 ## 14:30
 
-* Umsetzugn GUI
+* Umsetzung GUI
    * GUI Kontroller und FXML-Datein angepasst/fertiggestellt
    * Modelklassen leicht angepasst
+
+# 07.02.2022
+## 11:20
+
+* checkWin debugged
+  * funktioniert nun einwand frei
+* Arbeiten an der Benutzerfreundlichkeit
+  * Namenseingabe kann nun mit "Enter" bestätigt werden
