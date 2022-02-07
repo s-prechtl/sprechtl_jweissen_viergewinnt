@@ -32,9 +32,7 @@ import java.util.HashMap;
  * @date : 28.01.2022
  * @details Verwaltet Daten zum Spiel verbindet Ausgabe mit Eingabe und Spiel
  */
-//TODO: Augabe des aktuellen Spielers
 //TODO: mit Enter bestätigen
-//TODO: checkWin Linksoben nach rechtunten
 
 public class ControllerGUI {
     public HBox HBoxField;
@@ -76,15 +74,17 @@ public class ControllerGUI {
                 int finalX = x;
                 col.setOnMouseClicked(click -> {
                     if (!(game.checkTie() || game.checkWin())) {
-                        messageView.display(game.getPlayerName(game.getCurrPlayer()) + "'s move.");
                         tryPlace(finalX);
 
                         if (game.checkWin()) {
                             endView.displayWin(game.getPlayerName(game.getCurrPlayer()));
                         } else if (game.checkTie()) {
                             endView.displayTie();
+                        } else {
+                            updateMessageView();
                         }
                     }
+
                 });
             }
             x++;
@@ -142,7 +142,7 @@ public class ControllerGUI {
         boardView = new BoardViewGUI(getAllCircles(), playerColors);
 
         game = new Game(playerNames.get(PlayerID.Player0), playerNames.get(PlayerID.Player1));
-        messageView.display(game.getPlayerName(game.getCurrPlayer()) + "'s move.");
+        updateMessageView();
     }
 
     /**
@@ -154,8 +154,8 @@ public class ControllerGUI {
     private void tryPlace(int col) {
         try {
             game.play(col);
-            game.switchCurrPlayer();
             boardView.updateCell(game.getPrevCell().getX(), game.getPrevCell().getY(), game.getCurrPlayer());
+            game.switchCurrPlayer();
         } catch (InvalidPositionException ipe) {
             messageView.display(ipe.getMessage());
         }
@@ -168,9 +168,6 @@ public class ControllerGUI {
      */
     public void onButtonUndoClicked() {
         try {
-            if (game.checkWin()) {
-                game.switchCurrPlayer();
-            }
             boardView.updateCell(game.getPrevCell().getX(), game.getPrevCell().getY(), null);
             game.undo();
             messageView.display("Last move undone!");
@@ -203,5 +200,12 @@ public class ControllerGUI {
      */
     public static ControllerGUI getControllerGUI() {
         return controllerGUI;
+    }
+
+    /**
+     * Zeigt den derzeitigen Spieler in der messageView an.
+     */
+    private void updateMessageView(){
+        messageView.display(game.getPlayerName(game.getCurrPlayer()) + "'s move.");
     }
 }
