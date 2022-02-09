@@ -1,9 +1,5 @@
 package us.jost.sprechtl_jweissen_viergewinnt.view;
 
-import us.jost.sprechtl_jweissen_viergewinnt.model.PlayerID;
-
-import java.util.ArrayList;
-
 /*-----------------------------------------------------------------------------
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
@@ -12,12 +8,13 @@ import java.util.ArrayList;
  * Kurzbeschreibung
  *
  * @author  : Jonas Weissengruber
- * @date    : 28.01.2022
+ * @date    : 04.02.2022
  *
  * @details
- *   Implementierende Klassen nutzen die display()-Methode um das Spielfeld darzustellen
- *
+ *   gibt am Ende des Spieles den Ausgang aus
  */
-public interface BoardView {
-    void display(ArrayList<ArrayList<PlayerID>> board);
+public interface EndView {
+    void displayWin(String winnerName);
+
+    void displayTie();
 }

@@ -7,15 +7,13 @@ import java.util.ArrayList;
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
  *----------------------------------------------------------------------------*/
+
 /**
  * Spielbrett
  *
- * @author  : Stefan Prechtl
- * @date    : 28.01.2022
- *
- * @details
- *   Board, das zur Verwaltung der Cell-Daten verwendet wird.
- *
+ * @author : Stefan Prechtl
+ * @date : 28.01.2022
+ * @details Board, das zur Verwaltung der Cell-Daten verwendet wird.
  */
 public class Board {
     private static final int ROWS = 6;
@@ -57,6 +55,7 @@ public class Board {
             int y = previouslyChanged.getY();
             int ix;
             int iy;
+            int maxDist;
             boolean isWin = false;
 
             //horizontal
@@ -84,9 +83,10 @@ public class Board {
                 }
             }
 
-            //left up to right down
+            //left down to right up
             winCount = 0;
-            for (ix = initI_negative(x, Math.min(x,y)), iy = initI_negative(y, Math.min(x,y)); inArea(ix, iy) && !isWin; ix++, iy++) {
+            maxDist = getMaxDiagonalDistLeftDown(x, y);
+            for (ix = initI_negative(x, maxDist), iy = initI_negative(y, maxDist); inArea(ix, iy) && !isWin; ix++, iy++) {
                 if (accessCell(ix, iy).getState() == playerID) {
                     winCount++;
                 } else {
@@ -97,9 +97,10 @@ public class Board {
                 }
             }
 
-            //right up to left down
+            //left up to right down
             winCount = 0;
-            for (ix = initI_negative(x, Math.max(x,y)), iy = initI_positive(y, Math.max(x,y)); inArea(ix, iy) && !isWin; ix++, iy--) {
+            maxDist = getMaxDiagonalDistLeftUp(x, y);
+            for (ix = initI_negative(x, maxDist), iy = initI_positive(y, maxDist); inArea(ix, iy) && !isWin; ix++, iy--) {
                 if (accessCell(ix, iy).getState() == playerID) {
                     winCount++;
                 } else {
@@ -124,7 +125,7 @@ public class Board {
     }
 
     /**
-     * @param z Wert
+     * @param z    Wert
      * @param dist Maximale Distanz zum Subtrahieren
      * @return Maximalwert zum Ende des Feldes, bzw. zur dist
      */
@@ -133,12 +134,56 @@ public class Board {
     }
 
     /**
-     * @param z Wert
+     * @param z    Wert
      * @param dist Maximale Distanz zum Addieren
      * @return Maximalwert zum Ende des Feldes, bzw. zur dist
      */
     private int initI_positive(int z, int dist) {
         return (z + dist >= ROWS) ? ROWS - 1 : z + dist;
+    }
+
+    /**
+     * @param x Spalte
+     * @param y Reihe
+     * @return die maximale diagonale Distanz zum initialisieren ins negative nach links oben
+     */
+    private int getMaxDiagonalDistLeftUp(int x, int y) {
+        int rv = -1;
+        int dist;
+        boolean success;
+
+        for (dist = 1, success = true; dist <= WINDIST && success; dist++) {
+            success = inArea(x - dist, y + dist);
+            if (!success) {
+                rv = dist - 1;
+            }
+        }
+
+        rv = (rv == -1) ? WINDIST : rv;
+
+        return rv;
+    }
+
+    /**
+     * @param x Spalte
+     * @param y Reihe
+     * @return die maximale diagonale Distanz zum initialisieren ins negative nach links unten
+     */
+    private int getMaxDiagonalDistLeftDown(int x, int y) {
+        int rv = -1;
+        int dist;
+        boolean success;
+
+        for (dist = 1, success = true; dist <= WINDIST && success; dist++) {
+            success = inArea(x - dist, y - dist);
+            if (!success) {
+                rv = dist - 1;
+            }
+        }
+
+        rv = (rv == -1) ? WINDIST : rv;
+
+        return rv;
     }
 
     /**
@@ -211,6 +256,7 @@ public class Board {
 
     /**
      * Setzt zuletzt geänderte Zelle
+     *
      * @param previouslyChanged Zelle
      */
     public void setPreviouslyChanged(Cell previouslyChanged) {
