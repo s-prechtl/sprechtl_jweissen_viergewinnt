@@ -21,8 +21,8 @@ import java.util.HashMap;
  *   Managed mit Hilfe der CellViewGUI die Anzeige des Spielbretts in der GUI
  */
 public class BoardViewGUI {
-    ArrayList<ArrayList<Circle>> board;
-    CellViewGUI cellViewGUI;
+    private final ArrayList<ArrayList<Circle>> board;
+    private final CellViewGUI cellViewGUI;
 
     /**
      * initialisiert Attribute

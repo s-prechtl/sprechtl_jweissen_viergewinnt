@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  *   Gibt Text auf ein Spezifiziertes Label der GUI aus
  */
 public class MessageViewGUI implements MessageView {
-    Label label;
+    private final Label label;
 
     /**
      * initialisiert Attribute

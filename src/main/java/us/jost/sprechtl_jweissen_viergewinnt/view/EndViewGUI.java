@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  *   gibt den Spielausgang auf ein spezifiziertes Label aus
  */
 public class EndViewGUI implements EndView {
-    Label label;
+    private final Label label;
 
     /**
      * initialisiert Attribute

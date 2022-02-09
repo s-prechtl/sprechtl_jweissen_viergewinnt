@@ -20,7 +20,7 @@ import java.util.HashMap;
  *   Updated einzelne Zellen im GUI-Spielfeld
  */
 public class CellViewGUI {
-    HashMap<PlayerID, Color> colors;
+    private final HashMap<PlayerID, Color> colors;
 
     /**
      * initialisiert Attribute
