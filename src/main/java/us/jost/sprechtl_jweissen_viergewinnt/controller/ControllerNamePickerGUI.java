@@ -75,10 +75,11 @@ public class ControllerNamePickerGUI {
 
     /**
      * Falls Key == Enter -> confirmName
+     *
      * @param keyEvent Key
      */
     public void onKeyReleased(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.ENTER){
+        if (keyEvent.getCode() == KeyCode.ENTER) {
             confirmName();
         }
     }
@@ -86,7 +87,7 @@ public class ControllerNamePickerGUI {
     /**
      * Fügt, falls möglich, den gewählten Namen für den momentanen Spieler ein.
      */
-    private void confirmName(){
+    private void confirmName() {
         boolean success = false;
         String temp = LabelPlayerName.getText();
         PlayerID currplayer = null;

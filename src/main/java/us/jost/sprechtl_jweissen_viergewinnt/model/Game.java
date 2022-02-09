@@ -9,15 +9,13 @@ import java.util.Random;
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
  *----------------------------------------------------------------------------*/
+
 /**
  * Spiel
  *
- * @author  : Stefan Prechtl
- * @date    : 28.01.2022
- *
- * @details
- *   Verwaltet Board und Spieler, welche darauf agieren.
- *
+ * @author : Stefan Prechtl
+ * @date : 28.01.2022
+ * @details Verwaltet Board und Spieler, welche darauf agieren.
  */
 public class Game {
     private final HashMap<PlayerID, Player> players = new HashMap<>();
@@ -26,6 +24,7 @@ public class Game {
 
     /**
      * Konstruktor: Erstellt Board und Spieler, welche damit agieren.
+     *
      * @param name1 Name des 1. Spielers
      * @param name2 Name des 2. Spielers
      */
@@ -54,14 +53,15 @@ public class Game {
 
     /**
      * Macht den letzten Spielzug rückgängig.
+     *
      * @throws UndoNotPossibleException Falls undo am ersten Zug aufgerufen wird, oder undo mehrmals hintereinander
-     * aufgerufen wird.
+     *                                  aufgerufen wird.
      */
     public void undo() throws UndoNotPossibleException {
-        if (board.getPreviouslyChanged() == null){
+        if (board.getPreviouslyChanged() == null) {
             throw new UndoNotPossibleException();
         }
-        if (!checkWin()){
+        if (!checkWin()) {
             switchCurrPlayer();
         }
         board.getPreviouslyChanged().setState(null);
@@ -70,6 +70,7 @@ public class Game {
 
     /**
      * Spielt einen Zug in der angegebenen Spalte.
+     *
      * @param col Spalte zum Setzen der Zuges.
      * @throws IllegalArgumentException Falls die Spalte bereits voll ist.
      */
@@ -105,28 +106,28 @@ public class Game {
     /**
      * @return Ob das Spiel gewonnen wurde.
      */
-    public boolean checkWin(){
+    public boolean checkWin() {
         return board.checkWin();
     }
 
     /**
      * @return Ob das Spiel ein Unentschieden ist.
      */
-    public boolean checkTie(){
+    public boolean checkTie() {
         return board.checkTie();
     }
 
     /**
      * @return Vereinfachte Liste des boards, auf welchem die Zellen nur durch ihren Wert/State angegeben werden.
      */
-    public ArrayList<ArrayList<PlayerID>> getPlayerIDBoard(){
+    public ArrayList<ArrayList<PlayerID>> getPlayerIDBoard() {
         return board.boardToPlayerIDs();
     }
 
     /**
      * @return Letzte Zelle
      */
-    public Cell getPrevCell(){
+    public Cell getPrevCell() {
         return board.getPreviouslyChanged();
     }
 }

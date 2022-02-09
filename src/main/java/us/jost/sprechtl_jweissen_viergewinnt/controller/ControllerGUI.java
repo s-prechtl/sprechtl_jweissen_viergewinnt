@@ -40,7 +40,7 @@ public class ControllerGUI {
     private Game game;
     private MessageView messageView;
     private EndView endView;
-    BoardViewGUI boardView;
+    private BoardViewGUI boardView;
 
     private static ControllerGUI controllerGUI;
 

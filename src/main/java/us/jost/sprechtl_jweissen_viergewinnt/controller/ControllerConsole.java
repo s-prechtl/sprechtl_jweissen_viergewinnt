@@ -1,19 +1,3 @@
-/*-----------------------------------------------------------------------------
- *              Hoehere Technische Bundeslehranstalt STEYR
- *           Fachrichtung Informationstechnologie und Netzwerktechnik
- *----------------------------------------------------------------------------*/
-/**
- * ControllerConsole-Klasse
- *
- * @author  : Jonas Weissengruber
- * @date    : 03.02.2022
- *
- * @details
- *   Controller für die Konsolenanwendung, enthält Anwendungsabhängigen Teil des Spielablaufs
- *   verbindet Model&View
- *
- */
-
 package us.jost.sprechtl_jweissen_viergewinnt.controller;
 
 import us.jost.sprechtl_jweissen_viergewinnt.model.Game;
@@ -27,7 +11,18 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-
+/*-----------------------------------------------------------------------------
+ *              Hoehere Technische Bundeslehranstalt STEYR
+ *           Fachrichtung Informationstechnologie und Netzwerktechnik
+ *----------------------------------------------------------------------------*/
+/**
+ * ControllerConsole-Klasse
+ *
+ * @author : Jonas Weissengruber
+ * @date : 03.02.2022
+ * @details Controller für die Konsolenanwendung, enthält Anwendungsabhängigen Teil des Spielablaufs
+ * verbindet Model&View
+ */
 public class ControllerConsole {
     private static Game game;
     private static BoardView boardView;
@@ -69,6 +64,7 @@ public class ControllerConsole {
     /**
      * versucht einen Spielstein zu platzieren, sollte dies nicht möglich sein,
      * wird eine Error-Message ausgegeben
+     *
      * @param action die Spalte, in die gesetzt werden soll
      */
     private static void tryPlace(char action) {
@@ -126,7 +122,7 @@ public class ControllerConsole {
      * Wird keine Eingabe getätigt, werden die Standartwerte X und O verwendet
      *
      * @return HashMap der Spieler und ihrer Symbole
-     *         kann so an den BoardViewConsole-Konstruktor übergeben werden
+     * kann so an den BoardViewConsole-Konstruktor übergeben werden
      */
     private static HashMap<PlayerID, Character> promptPlayingChars() {
         HashMap<PlayerID, Character> defaultPlayingChars = new HashMap<>();
@@ -167,6 +163,7 @@ public class ControllerConsole {
 
     /**
      * Gibt das Ergebnis des Spieles aus
+     *
      * @param win gibt an, ob jemand gewonnen hat oder ob es unentschieden ausging
      */
     private static void showResult(boolean win) {
@@ -181,6 +178,7 @@ public class ControllerConsole {
 
     /**
      * fragt nach dem Spielende, ob das spiel neu gestartet werden soll
+     *
      * @return ob das spiel neu gestartet werden soll
      */
     private static boolean promptReset() {

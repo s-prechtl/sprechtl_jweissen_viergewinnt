@@ -14,19 +14,18 @@ import java.io.IOException;
  *              Hoehere Technische Bundeslehranstalt STEYR
  *           Fachrichtung Informationstechnologie und Netzwerktechnik
  *----------------------------------------------------------------------------*/
+
 /**
  * Anwendung
  *
- * @author  : Stefan Prechtl
- * @date    : 28.01.2022
- *
- * @details
- *   Startet das GUI
- *
+ * @author : Stefan Prechtl
+ * @date : 28.01.2022
+ * @details Startet das GUI
  */
 public class VierGewinntApplication extends Application {
     /**
      * Startet die Anwendung
+     *
      * @param stage Hauptfenster des GUI
      * @throws IOException Falls FXML-File des Hauptfensters nicht vorhanden
      */
