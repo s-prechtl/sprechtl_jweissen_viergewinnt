@@ -68,5 +68,6 @@
    * Angefangen die GUI-Klassen einzutragen
 
 ## 23:00
+
 * Klassendiagramm fertiggestellt
 * Release GUI 1.0 erstellt
