@@ -48,6 +48,21 @@
 ## 11:20
 
 * checkWin debugged
-  * funktioniert nun einwand frei
+  * funktioniert nun einwandfrei
 * Arbeiten an der Benutzerfreundlichkeit
   * Namenseingabe kann nun mit "Enter" bestätigt werden
+
+# 08.02.2022
+## 11:50
+
+* checkWin debugged
+   * noch nicht fertiggestellt
+
+# 09.02.2022
+## 12:16
+
+* checkWin debugged
+   * funktioniert nun einwandfrei (diesmal wirklich)
+* IntelliJ automatisches File-Formatting auf alle Dateien angewandt
+* Änderungen am Klassendiagramm
+   * Angefangen die GUI-Klassen einzutragen
