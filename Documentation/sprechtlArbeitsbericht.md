@@ -66,3 +66,7 @@
 * IntelliJ automatisches File-Formatting auf alle Dateien angewandt
 * Änderungen am Klassendiagramm
    * Angefangen die GUI-Klassen einzutragen
+
+## 23:00
+* Klassendiagramm fertiggestellt
+* Release GUI 1.0 erstellt
